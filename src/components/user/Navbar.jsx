@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Container from "../../ui/container";
+import Container from "../../ui/Container";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
