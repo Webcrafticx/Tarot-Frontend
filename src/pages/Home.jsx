@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "../ui/container";
 import HomeLayout from "../layout/HomeLayout";
 import HeroSection from "../components/user/HeroSection";
 import About from "../components/user/About";
