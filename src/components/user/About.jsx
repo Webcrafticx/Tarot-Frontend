@@ -1,0 +1,92 @@
+import React from "react";
+import Container from "../../ui/container";
+import { SlBadge } from "react-icons/sl";
+
+const About = () => {
+    return (
+        <Container className="py-12 md:py-16">
+            <div
+                id="about"
+                className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8"
+            >
+                {/* Desktop: relative positioning to allow image overflow */}
+                <div className="relative grid grid-cols-1 md:grid-cols-3  items-center bg-[#1B0F1E] rounded-3xl shadow-lg overflow-hidden md:overflow-visible">
+                    {/* Left - Content (appears first on mobile, left on desktop) */}
+                    <div className="text-center md:col-span-2 md:text-left text-white p-6 md:pl-20 md:pr-8 lg:pr-16 space-y-4 md:space-y-6 order-2  relative z-10">
+                        {/* Badge */}
+                        <div>
+                            <span className="border border-[#A1A1A1]  text-[#A1A1A1] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide">
+                                About Your Therapist
+                            </span>
+                        </div>
+
+                        {/* Heading */}
+                        <h2 className="text-2xl md:text-2xl xl:text-4xl font-semibold leading-tight">
+                            I'm Here To Serve You
+                        </h2>
+
+                        {/* Description */}
+                        <p className="text-sm md:text-sm xl:text-lg text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                            Hi, I'm Nadine, a spiritual counsellor helping you
+                            find peace, meaning, and deeper connection in life.
+                            Whether you're seeking healing, spiritual growth, or
+                            a renewed sense of purpose, I'm here to support you
+                            on your journey.
+                        </p>
+
+                        {/* Achievements */}
+                        <div className="flex flex-col md:flex-row justify-center items-center md:items-start md:justify-start gap-3 md:gap-4 text-base md:text-xs max-w-xl mx-auto xl:mx-0">
+                            <div className="flex items-center gap-2   text-[#C2B6C1] ">
+                                <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5" />
+                                <span>Diploma in Spiritual Care</span>
+                            </div>
+
+                            <div className="flex items-center gap-2   text-[#C2B6C1] ">
+                                <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5" />
+                                <span>Reiki Levels I, II & III</span>
+                            </div>
+                        </div>
+
+                        {/* CTA Button */}
+                        <div className="pt-2 md:pt-4">
+                            <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block">
+                                <button className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
+                                    Book My Free Consultation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right - Image Section */}
+                    <div className="flex justify-center p-4 md:p-6 lg:p-0 order-1  relative">
+                        {/* Mobile & Tablet: Normal contained image */}
+                        <div className="md:hidden relative w-44 h-56 sm:w-48 sm:h-72 md:w-56 md:h-80">
+                            <div className="rounded-t-full overflow-hidden border-4 border-[#C2B6C1] w-full h-full">
+                                <img
+                                    src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                    alt="Therapist Portrait"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Desktop: Overflowing image */}
+                        <div className="hidden md:block absolute md:-top-40 md:-right-14 lg:-top-54 lg:-right-6 md:h-[358px] lg:h-[440px] xl:right-10 xl:-top-64 w-58 lg:w-72  xl:w-96 xl:h-[520px] order-1">
+                            <div className="rounded-t-full overflow-hidden border-4 border-[#824E1A] w-full h-full shadow-2xl p-2">
+                                <div className="rounded-t-full overflow-hidden  w-full h-full shadow-2xl">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                        alt="Therapist Portrait"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Container>
+    );
+};
+
+export default About;

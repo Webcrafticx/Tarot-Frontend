@@ -1,14 +1,14 @@
-import Container from "./ui/container"
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-function App() {
-  return (
-    <Container className="min-h-screen bg-gradient-to-br from-purple-800 via-indigo-900 to-black text-white p-8">
-      <h1 className="text-5xl font-bold mb-6">🔮 Tarot Frontend</h1>
-      <p className="text-lg text-gray-300">
-        Welcome to your magical tarot reading app ✨
-      </p>
-    </Container>
-  )
-}
+const App = () => {
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </div>
+    );
+};
 
-export default App
+export default App;
