@@ -1,0 +1,63 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah Johnson",
+      "age": "34",
+      "rating": 5,
+      "text": "I felt truly seen and supported throughout my journey—Nadine is a compassionate guide who understands my needs."
+    },
+    {
+      "id": 2,
+      "name": "Mark Williams",
+      "age": "45",
+      "rating": 5,
+      "text": "I reached out to Nadine during a period of uncertainty in my relationship. Her counselling helped me understand my feelings better and gave me the tools to communicate more openly with my partner. Our connection is now stronger, and I feel more secure in myself."
+    },
+    {
+      "id": 3,
+      "name": "Jessica patel",
+      "age": "38",
+      "rating": 5,
+      "text": "After years of battling anxiety, I sought energy healing with Nadine. Each session helped me release deep-seated tension, and I noticed a significant reduction in my anxiety. Now, I approach stressful situations with a newfound sense of calm and clarity."
+    },
+    {
+      "id": 4,
+      "name": "Emily Thompson",
+      "age": "29",
+      "rating": 5,
+      "text": "Energy healing with Nadine has been life-changing—my stress and anxiety have significantly reduced."
+    },
+    {
+      "id": 5,
+      "name": "David Carter",
+      "age": "42",
+      "rating": 5,
+      "text": "“The counselling sessions helped me find clarity and peace in a time of great uncertainty.”"
+    },
+    
+    {
+      "id": 6,
+      "name": "Michael Lee",
+      "age": "51",
+      "rating": 5,
+      "text": "The retreat was a transformative experience that deepened my spiritual connection and gave me the strength to move forward."
+    },
+   
+    {
+      "id": 7,
+      "name": "Chloe Davis",
+      "age": "26",
+      "rating": 5,
+      "text": "After years of battling anxiety, I sought energy healing with Nadine. Each session helped me release deep-seated tension, and I noticed a significant reduction in my anxiety. Now, I approach stressful situations with a newfound sense of calm and clarity."
+    },
+    {
+      "id": 8,
+      "name": "Ryan Martinez",
+      "age": "39",
+      "rating": 5,
+      "text": "The retreat was a deeply healing and transformative experience. I left feeling rejuvenated and more connected to my spiritual self. The guidance I received helped me release emotional blockages and gain a clearer vision for my life’s path."
+    }
+  ]
+ 
+}
