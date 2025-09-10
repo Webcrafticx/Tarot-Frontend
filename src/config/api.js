@@ -1,11 +1,5 @@
-import React from 'react'
+// const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://tarot-backend-gvsl.onrender.com/api';
 
-const api = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
 
-export default api
+export default API_BASE_URL;
