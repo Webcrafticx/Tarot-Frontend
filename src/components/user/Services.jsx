@@ -1,32 +1,116 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../../ui/Container";
+import BookingModal from "./BookingModal"; // New modal component
+
+import servicesData from './services.json';
+import countryCodesData from './countrycodes.json';
 
 const Services = () => {
-    const services = [
-        {
-            id: 1,
-            title: "SPIRITUAL COUNSELLING",
-            description:
-                "Private guidance for clarity, healing, and personal growth.",
-            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            alt: "Woman in spiritual counselling session",
-        },
-        {
-            id: 2,
-            title: "ENERGY HEALING",
-            description: "Restore balance and release emotional blockages.",
-            image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            alt: "Energy healing session with hands",
-        },
-        {
-            id: 3,
-            title: "RETREATS & WORKSHOPS",
-            description:
-                "Deepen your journey through immersive group experiences.",
-            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            alt: "Group meditation and workshop setting",
-        },
-    ];
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedService, setSelectedService] = useState(null);
+    const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
+    const [selectedDuration, setSelectedDuration] = useState(null);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        location: "",
+        duration: 30
+    });
+
+    // Use imported JSON data with error handling
+    const services = Array.isArray(servicesData) ? servicesData : [];
+    const countryCodes = Array.isArray(countryCodesData) ? countryCodesData : [];
+
+    const handleBookService = (service) => {
+        setSelectedService(service);
+        setSelectedDuration(service.durations[0]?.time || 30);
+        setFormData(prev => ({
+            ...prev,
+            duration: service.durations[0]?.time || 30
+        }));
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedService(null);
+        setSelectedDuration(null);
+        setFormData({
+            name: "",
+            email: "",
+            phoneNumber: "",
+            location: "",
+            duration: 30
+        });
+        setSelectedCountryCode("+91");
+    };
+
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    // New function to handle country code change and auto-fill location
+    const handleCountryCodeChange = (e) => {
+        const newCountryCode = e.target.value;
+        setSelectedCountryCode(newCountryCode);
+        
+        // Find the selected country and auto-fill location
+        const selectedCountry = countryCodes.find(c => c.code === newCountryCode);
+        if (selectedCountry) {
+            setFormData({
+                ...formData,
+                location: selectedCountry.country
+            });
+        }
+    };
+
+    const handleDurationSelect = (duration) => {
+        setSelectedDuration(duration);
+        setFormData({
+            ...formData,
+            duration: duration
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission - payment processing
+        const selectedDurationData = selectedService.durations.find(d => d.time === parseInt(formData.duration));
+        const selectedCountry = countryCodes.find(c => c.code === selectedCountryCode);
+        const price = selectedCountry?.type === "india" ? selectedDurationData?.priceIndia : selectedDurationData?.priceNri;
+        
+        console.log("Booking Details:", {
+            service: selectedService.title,
+            ...formData,
+            countryCode: selectedCountryCode,
+            location: selectedCountry?.country,
+            price: price
+        });
+        
+        alert(`Booking confirmed for ${selectedService.title} - ${formData.duration} minutes. Price: ₹${price}`);
+        closeModal();
+    };
+
+    const getPrice = (service, duration) => {
+        const durationData = service.durations.find(d => d.time === duration);
+        const selectedCountry = countryCodes.find(c => c.code === selectedCountryCode);
+        return selectedCountry?.type === "india" ? durationData?.priceIndia : durationData?.priceNri;
+    };
+
+    // Effect to auto-fill location when component mounts with default country code
+    useEffect(() => {
+        const defaultCountry = countryCodes.find(c => c.code === selectedCountryCode);
+        if (defaultCountry && !formData.location) {
+            setFormData(prev => ({
+                ...prev,
+                location: defaultCountry.country
+            }));
+        }
+    }, [countryCodes, selectedCountryCode]);
 
     return (
         <Container className="py-12 md:py-16">
@@ -45,32 +129,21 @@ const Services = () => {
                         How I Can Serve You
                     </h2>
                     <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
-                        All services available in-person and online for maximum
-                        flexibility.
+                        All services available in-person and online for maximum flexibility.
                     </p>
                 </div>
 
-                {/* Services Grid - 1 column mobile, 3 columns tablet and desktop */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 lg:gap-6">
+                {/* Services Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4 lg:gap-6">
                     {services.map((service) => (
                         <div
                             key={service.id}
-                            className="text-center group cursor-pointer"
+                            className="text-center group cursor-pointer p-4 rounded-lg hover:bg-white/20 transition-all duration-300"
                         >
-                            {/* Service Image with Arch Shape */}
+                            {/* Service Image */}
                             <div className="mb-4 md:mb-5">
                                 <div className="relative w-full max-w-xs md:max-w-none mx-auto">
-                                    {/* Mobile: Larger images */}
-                                    <div className="md:hidden aspect-[4/5] rounded-t-full overflow-hidden border-4 border-gray-300 group-hover:border-[#5B2655] transition-colors duration-300">
-                                        <img
-                                            src={service.image}
-                                            alt={service.alt}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                    </div>
-
-                                    {/* Tablet & Desktop: Compact images */}
-                                    <div className="hidden md:block aspect-[3/4] rounded-t-full overflow-hidden border-3 border-gray-300 group-hover:border-[#5B2655] transition-colors duration-300">
+                                    <div className="aspect-[4/5] rounded-t-full overflow-hidden border-4 border-gray-300 group-hover:border-[#5B2655] transition-colors duration-300">
                                         <img
                                             src={service.image}
                                             alt={service.alt}
@@ -85,30 +158,46 @@ const Services = () => {
                                 <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 md:mb-3 uppercase tracking-wide leading-tight">
                                     {service.title}
                                 </h3>
-                                <p className="text-sm md:text-sm text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto">
+                                <p className="text-sm md:text-sm text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto mb-4">
                                     {service.description}
                                 </p>
+
+                                {/* Book Button */}
+                                <button 
+                                    onClick={() => handleBookService(service)}
+                                    className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 text-white px-4 py-2 rounded-full text-sm font-semibold tracking-wider transition-colors duration-200 uppercase cursor-pointer"
+                                >
+                                    Book Now
+                                </button>
                             </div>
                         </div>
                     ))}
-                </div>
-                {/* Optional CTA Section */}
-                <div className="text-center mt-8 md:mt-10">
-                    <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block">
-                        <button className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
-                            Explore All Services
-                        </button>
-                    </div>
                 </div>
 
                 {/* Quote Section */}
                 <div className="text-center mt-12 md:mt-16">
                     <blockquote className="text-lg md:text-xl lg:text-4xl font-medium text-gray-700 italic leading-relaxed max-w-3xl mx-auto">
-                        "I hold a space for you to be fully seen and heard—this
-                        is when healing begins."
+                        "I hold a space for you to be fully seen and heard—this is when healing begins."
                     </blockquote>
                 </div>
             </div>
+
+            {/* Booking Modal */}
+            {isModalOpen && selectedService && (
+                <BookingModal
+                    selectedService={selectedService}
+                    selectedCountryCode={selectedCountryCode}
+                    selectedDuration={selectedDuration}
+                    formData={formData}
+                    countryCodes={countryCodes}
+                    closeModal={closeModal}
+                    handleInputChange={handleInputChange}
+                    handleCountryCodeChange={handleCountryCodeChange}
+                    handleDurationSelect={handleDurationSelect}
+                    handleSubmit={handleSubmit}
+                    getPrice={getPrice}
+                />
+            )}
         </Container>
     );
 };
