@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "title": "Tarot Card Reading Session",
+        "description": "Get clarity and guidance through tarot cards.",
+        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+        "alt": "Tarot card reading session",
+        "durations": [
+            {
+                "time": 30,
+                "priceIndia": 2999,
+                "priceNri": 3999
+            },
+            {
+                "time": 45,
+                "priceIndia": 4299,
+                "priceNri": 5799
+            },
+            {
+                "time": 60,
+                "priceIndia": 5899,
+                "priceNri": 7899
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Akashic Record Reading",
+        "description": "Deep soul-level insights (6 sessions required).",
+        "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+        "alt": "Akashic record reading",
+        "durations": [
+            {
+                "time": 30,
+                "priceIndia": 2599,
+                "priceNri": 2599
+            },
+            {
+                "time": 45,
+                "priceIndia": 3299,
+                "priceNri": 3299
+            },
+            {
+                "time": 60,
+                "priceIndia": 4199,
+                "priceNri": 4199
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Numerology Correction",
+        "description": "Name, house number & mobile number correction.",
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+        "alt": "Numerology correction",
+        "durations": [
+            {
+                "time": 30,
+                "priceIndia": 4999,
+                "priceNri": 4999
+            },
+            {
+                "time": 45,
+                "priceIndia": 4999,
+                "priceNri": 4999
+            },
+            {
+                "time": 60,
+                "priceIndia": 4999,
+                "priceNri": 4999
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Single Question Reading",
+        "description": "Get an answer for a single burning question.",
+        "image": "https://images.unsplash.com/photo-1524492449090-1a065f2a1cb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+        "alt": "Single tarot question",
+        "durations": [
+            {
+                "time": 30,
+                "priceIndia": 1199,
+                "priceNri": 1199
+            },
+            {
+                "time": 45,
+                "priceIndia": 1199,
+                "priceNri": 1199
+            },
+            {
+                "time": 60,
+                "priceIndia": 1199,
+                "priceNri": 1199
+            }
+        ]
+    }
+]
