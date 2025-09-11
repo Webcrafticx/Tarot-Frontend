@@ -3,7 +3,7 @@ import Container from "../../ui/Container";
 import BookingModal from "./BookingModal"; // New modal component
 
 import servicesData from './services.json';
-import countryCodesData from './countrycodes.json';
+import countryCodesData from './countryCodes.json';
 
 const Services = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
