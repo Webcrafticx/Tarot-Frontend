@@ -71,8 +71,14 @@ const Navbar = () => {
 
                         {/* Desktop CTA Button - Hidden on tablet and mobile */}
                         <div className="hidden lg:block border-solid border-[#5A2654] border-2 rounded-full p-1">
-                            <button className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 uppercase">
-                                Book My Free Consultation
+                            <button   onClick={() => {
+    const section = document.getElementById("services");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+ className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 uppercase">
+                                Book My Consultation
                             </button>
                         </div>
 

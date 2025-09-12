@@ -50,8 +50,14 @@ const About = () => {
                         {/* CTA Button */}
                         <div className="pt-2 md:pt-4">
                             <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block">
-                                <button className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
-                                    Book My Free Consultation
+                                <button   onClick={() => {
+    const section = document.getElementById("services");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+ className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
+                                    Book My Consultation
                                 </button>
                             </div>
                         </div>

@@ -34,9 +34,17 @@ const HeroSection = () => {
                             {/* CTA Button */}
                             <div className="pt-4">
                                 <div className="border-solid border-[#5A2654] border-2 rounded-full p-1 inline-block">
-                                    <button className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
-                                        Book My Free Consultation
-                                    </button>
+                                    <button
+  onClick={() => {
+    const section = document.getElementById("services");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-semibold tracking-wider transition-colors duration-200 uppercase"
+>
+  Book My Consultation
+</button>
                                 </div>
                             </div>
                         </div>

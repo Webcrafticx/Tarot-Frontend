@@ -73,13 +73,13 @@ const HowItWorks = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="text-center">
+                {/* <div className="text-center">
                     <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block">
                         <button className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-colors duration-200 uppercase">
                             Start My Free Consultation
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Container>
     );
