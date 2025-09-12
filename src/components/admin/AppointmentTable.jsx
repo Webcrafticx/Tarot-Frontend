@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   ChevronUp, ChevronDown, Calendar, MessageCircle, 
-  ChevronLeft, ChevronRight, Loader,
-  Search, Phone, Mail, Clock, IndianRupee
+  ChevronLeft, ChevronRight,
+  Search, Phone, Clock
 } from "lucide-react";
-import { getAllAppointments } from "../../services/appointment";
 
-const AppointmentTable = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const AppointmentTable = ({ 
+  appointments, 
+  error, 
+  paginationInfo, 
+  fetchAppointments 
+}) => {
   const [search, setSearch] = useState("");
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -17,48 +18,14 @@ const AppointmentTable = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [paginationInfo, setPaginationInfo] = useState({
-    totalAppointments: 0,
-    totalPages: 1,
-    currentPage: 1,
-    limit: 10,
-    prevPage: null,
-    nextPage: null
-  });
   const [expandedRow, setExpandedRow] = useState(null);
 
-  // Fetch appointments from API
-  const fetchAppointments = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await getAllAppointments();
-      
-      // If API returns data, use it
-      if (response && response.success) {
-        setAppointments(response.data || []);
-        setPaginationInfo(response.pagination || {
-          totalAppointments: response.data?.length || 0,
-          totalPages: 1,
-          currentPage: 1,
-          limit: 10,
-          prevPage: null,
-          nextPage: null
-        });
-      } else {
-        throw new Error(response.message || "Invalid data format received from server");
-      }
-    } catch (err) {
-      setError(err.message || "Failed to fetch appointments");
-      console.error("Error fetching appointments:", err);
-    } finally {
-      setLoading(false);
-    }
+  // Handle items per page change
+  const handleItemsPerPageChange = (newLimit) => {
+    setItemsPerPage(newLimit);
+    setCurrentPage(1);
+    fetchAppointments(1, newLimit);
   };
-
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
 
   // Format duration to show minutes
   const formatDuration = (duration) => {
@@ -225,17 +192,6 @@ const AppointmentTable = () => {
     return buttons;
   };
 
-  if (loading) {
-    return (
-      <div className="mt-4 px-4 sm:px-6">
-        <div className="flex flex-col items-center justify-center h-64">
-          <Loader className="animate-spin h-8 w-8 text-blue-500" />
-          <span className="ml-2 text-gray-600 mt-2">Loading appointments...</span>
-        </div>
-      </div>
-    );
-  }
-
   if (error && appointments.length === 0) {
     return (
       <div className="mt-4 px-4 sm:px-6">
@@ -243,7 +199,7 @@ const AppointmentTable = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <span className="text-sm">Error: {error}</span>
             <button 
-              onClick={fetchAppointments}
+              onClick={() => fetchAppointments(currentPage, itemsPerPage)}
               className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm flex items-center"
             >
               Try Again
@@ -263,10 +219,7 @@ const AppointmentTable = () => {
             <span className="text-xs sm:text-sm text-gray-600">Show:</span>
             <select
               value={itemsPerPage}
-              onChange={(e) => {
-                setItemsPerPage(Number(e.target.value));
-                setCurrentPage(1);
-              }}
+              onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
               className="border border-gray-300 rounded-md px-2 py-1 text-xs sm:text-sm cursor-pointer"
             >
               <option value={5}>5</option>
@@ -295,7 +248,7 @@ const AppointmentTable = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <span className="text-sm">Note: {error}</span>
             <button 
-              onClick={fetchAppointments}
+              onClick={() => fetchAppointments(currentPage, itemsPerPage)}
               className="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 text-sm"
             >
               Retry
@@ -407,7 +360,6 @@ const AppointmentTable = () => {
                     </td>
                     <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
                       <div className="flex items-center gap-1">
-                        {/* <IndianRupee className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" /> */}
                         {formatPrice(appointment.price)}
                       </div>
                     </td>
@@ -500,7 +452,6 @@ const AppointmentTable = () => {
                   <span>{formatDuration(appointment.duration)}</span>
                 </div>
                 <div className="flex items-center gap-1 text-gray-600">
-                  {/* <IndianRupee className="w-3 h-3" /> */}
                   <span>{formatPrice(appointment.price)}</span>
                 </div>
               </div>

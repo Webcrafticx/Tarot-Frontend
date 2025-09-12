@@ -44,7 +44,7 @@ const SlotAppointmentsIcon = () => (
   </svg>
 );
 
-const Overview = ({ appointments, loading, error }) => {
+const Overview = ({ appointments, error }) => {
   const [stats, setStats] = useState({
     total: 0,
     mondayWednesday: 0,
@@ -55,13 +55,13 @@ const Overview = ({ appointments, loading, error }) => {
   useEffect(() => {
     if (appointments?.length > 0) {
       const mondayWednesdayCount = appointments.filter(
-        (a) => a.day === "Monday - Wednesday"
+        (a) => a.selectedWindow === "Mon-Wed" || a.selectedWindow === "Monday - Wednesday"
       ).length;
       const thursdayFridayCount = appointments.filter(
-        (a) => a.day === "Thursday - Friday"
+        (a) => a.selectedWindow === "Thu-Fri" || a.selectedWindow === "Thursday - Friday"
       ).length;
       const saturdaySundayCount = appointments.filter(
-        (a) => a.day === "Saturday - Sunday"
+        (a) => a.selectedWindow === "Sat-Sun" || a.selectedWindow === "Saturday - Sunday"
       ).length;
 
       setStats({
@@ -70,18 +70,16 @@ const Overview = ({ appointments, loading, error }) => {
         thursdayFriday: thursdayFridayCount,
         saturdaySunday: saturdaySundayCount,
       });
+    } else {
+      // Reset stats when no appointments
+      setStats({
+        total: 0,
+        mondayWednesday: 0,
+        thursdayFriday: 0,
+        saturdaySunday: 0,
+      });
     }
   }, [appointments]);
-
-  if (loading)
-    return (
-      <div className="p-5">
-        <div className="flex items-center justify-center h-48">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-2 text-gray-600">Loading appointments...</span>
-        </div>
-      </div>
-    );
 
   if (error)
     return (
