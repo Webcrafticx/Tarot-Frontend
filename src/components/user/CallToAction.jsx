@@ -6,11 +6,11 @@ const CallToAction = () => {
     const [ctaRef, ctaVisible] = useInView();
 
     return (
-        <Container className="pt-0">
+        <Container>
             <div
                 id="cta"
                 ref={ctaRef}
-                className="min-h-screen bg-gradient-to-b px-4 md:px-8 from-[#E1D9CB] to-[#F5F3EF] rounded-4xl flex items-center justify-center"
+                className="min-h-fit bg-gradient-to-b px-4 py-8 md:px-8 from-[#E1D9CB] to-[#F5F3EF] rounded-4xl flex items-center justify-center"
             >
                 {/* Single CTA Card */}
                 <div className="w-full max-w-6xl mx-auto transform transition-all duration-700 ease-in-out">

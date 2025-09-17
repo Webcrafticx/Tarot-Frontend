@@ -33,10 +33,10 @@ const FAQ = () => {
     ];
 
     return (
-        <Container className="pt-12">
+        <Container>
             <div
                 id="faq"
-                className="min-h-screen bg-gradient-to-b pt-8 px-4 from-[#F5F3EF] to-[#E1D9CB] rounded-4xl"
+                className="bg-gradient-to-b pt-8 px-4 from-[#F5F3EF] to-[#E1D9CB] rounded-4xl"
             >
                 {/* FAQ Header */}
                 <div
