@@ -67,7 +67,7 @@ const HowItWorks = () => {
                             <div
                                 key={step.id}
                                 ref={stepRef}
-                                className={`relative text-center group cursor-pointer p-6 rounded-xl hover:bg-white/50  transform transition-all duration-700 ease-in-out delay-${
+                                className={`relative text-center group cursor-pointer p-6 rounded-xl  transform transition-all duration-700 ease-in-out delay-${
                                     index * 200
                                 } ${
                                     stepVisible
@@ -77,7 +77,7 @@ const HowItWorks = () => {
                             >
                                 {/* Step Number */}
                                 <div className="mb-4 md:mb-6">
-                                    <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#5B2655] group-hover:text-[#814E7A] transition-colors duration-300">
+                                    <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#5B2655]  transition-colors duration-300">
                                         {step.number}
                                     </span>
                                 </div>

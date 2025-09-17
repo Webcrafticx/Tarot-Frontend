@@ -123,7 +123,7 @@ const HeroSection = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto text-center">
                             {/* Emotional Healing */}
                             <div className="space-y-4 group cursor-pointer">
-                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1] group-hover:bg-[#814E7A] transition-colors duration-300">
+                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1]  transition-colors duration-300">
                                     {/* icon */}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@ const HeroSection = () => {
 
                             {/* Clarity & Purpose */}
                             <div className="space-y-4 group cursor-pointer">
-                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1] group-hover:bg-[#814E7A] transition-colors duration-300">
+                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1]  transition-colors duration-300">
                                     {/* icon */}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +185,7 @@ const HeroSection = () => {
 
                             {/* Spiritual Connection */}
                             <div className="space-y-4 group cursor-pointer">
-                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1] group-hover:bg-[#814E7A] transition-colors duration-300">
+                                <div className="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-[#C2B6C1]  transition-colors duration-300">
                                     {/* icon */}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
