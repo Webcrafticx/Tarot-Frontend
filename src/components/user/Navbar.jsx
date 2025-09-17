@@ -42,25 +42,25 @@ const Navbar = () => {
                             <div className="hidden lg:block">
                                 <div className="flex items-center space-x-8">
                                     <a
-                                        href="#"
+                                        href="#about"
                                         className="ttext-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
                                     >
                                         ABOUT
                                     </a>
                                     <a
-                                        href="#"
+                                        href="#services"
                                         className="text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
                                     >
                                         SERVICES
                                     </a>
                                     <a
-                                        href="#"
+                                        href="#testimonials"
                                         className="text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
                                     >
                                         TESTIMONIALS
                                     </a>
                                     <a
-                                        href="#"
+                                        href="#faq"
                                         className="text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
                                     >
                                         FAQ
@@ -71,13 +71,18 @@ const Navbar = () => {
 
                         {/* Desktop CTA Button - Hidden on tablet and mobile */}
                         <div className="hidden lg:block border-solid border-[#5A2654] border-2 rounded-full p-1">
-                            <button   onClick={() => {
-    const section = document.getElementById("services");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  }}
- className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 uppercase">
+                            <button
+                                onClick={() => {
+                                    const section =
+                                        document.getElementById("services");
+                                    if (section) {
+                                        section.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
+                                    }
+                                }}
+                                className="bg-[#5B2655] hover:bg-[#5A2654] cursor-pointer text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-colors duration-200 uppercase"
+                            >
                                 Book My Consultation
                             </button>
                         </div>
