@@ -19,6 +19,157 @@ const BookingModal = ({
   const [selectedWindow, setSelectedWindow] = useState("");
   const [isLoadingWindows, setIsLoadingWindows] = useState(false);
 
+  // Function to get the next occurrence of a window based on current day
+  const getNextWindowDate = (windowName) => {
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday
+    
+    // Parse window name to get available days
+    const parseWindowDays = (windowName) => {
+      const windowLower = windowName.toLowerCase();
+      let availableDays = [];
+      
+      if (windowLower.includes('mon-wed')) {
+        availableDays = [1, 2, 3]; // Monday, Tuesday, Wednesday
+      } else if (windowLower.includes('thu-fri')) {
+        availableDays = [4, 5]; // Thursday, Friday
+      } else if (windowLower.includes('sat-sun')) {
+        availableDays = [6, 0]; // Saturday, Sunday
+      } else {
+        // Individual day parsing
+        if (windowLower.includes('mon')) availableDays.push(1);
+        if (windowLower.includes('tue')) availableDays.push(2);
+        if (windowLower.includes('wed')) availableDays.push(3);
+        if (windowLower.includes('thu')) availableDays.push(4);
+        if (windowLower.includes('fri')) availableDays.push(5);
+        if (windowLower.includes('sat')) availableDays.push(6);
+        if (windowLower.includes('sun')) availableDays.push(0);
+      }
+      
+      return availableDays;
+    };
+
+    const availableDays = parseWindowDays(windowName);
+    
+    // Check if current day is within the window range
+    const isCurrentlyInWindow = availableDays.includes(currentDay);
+    
+    // If currently in window, show today's date
+    if (isCurrentlyInWindow) {
+      return new Date(now);
+    }
+    
+    // If not in window, find the next occurrence
+    // Check if the window has passed for this week
+    const maxDayInWindow = Math.max(...availableDays);
+    const minDayInWindow = Math.min(...availableDays);
+    
+    let targetDate = new Date(now);
+    
+    if (currentDay > maxDayInWindow) {
+      // Window has passed, show next week's first day of window
+      const daysToNextWeek = 7 - currentDay + minDayInWindow;
+      targetDate.setDate(now.getDate() + daysToNextWeek);
+    } else {
+      // Window hasn't started yet this week, show this week's first day
+      const daysToWindow = minDayInWindow - currentDay;
+      targetDate.setDate(now.getDate() + daysToWindow);
+    }
+    
+    return targetDate;
+  };
+
+  // Function to get window date range display
+  const getWindowDateRange = (windowName) => {
+    const now = new Date();
+    const currentDay = now.getDay();
+    
+    const parseWindowDays = (windowName) => {
+      const windowLower = windowName.toLowerCase();
+      let availableDays = [];
+      
+      if (windowLower.includes('mon-wed')) {
+        availableDays = [1, 2, 3]; // Monday, Tuesday, Wednesday
+      } else if (windowLower.includes('thu-fri')) {
+        availableDays = [4, 5]; // Thursday, Friday
+      } else if (windowLower.includes('sat-sun')) {
+        availableDays = [6, 0]; // Saturday, Sunday
+      }
+      
+      return availableDays;
+    };
+
+    const availableDays = parseWindowDays(windowName);
+    if (availableDays.length === 0) return null;
+    
+    const maxDayInWindow = Math.max(...availableDays);
+    const minDayInWindow = Math.min(...availableDays);
+    
+    // Determine if we need current week or next week
+    const needNextWeek = currentDay > maxDayInWindow;
+    
+    // Calculate start and end dates of the window
+    let startDate = new Date(now);
+    let endDate = new Date(now);
+    
+    if (needNextWeek) {
+      // Next week's window
+      const daysToNextWeekStart = 7 - currentDay + minDayInWindow;
+      const daysToNextWeekEnd = 7 - currentDay + maxDayInWindow;
+      startDate.setDate(now.getDate() + daysToNextWeekStart);
+      endDate.setDate(now.getDate() + daysToNextWeekEnd);
+    } else {
+      // Current week's window
+      const daysToWindowStart = minDayInWindow - currentDay;
+      const daysToWindowEnd = maxDayInWindow - currentDay;
+      startDate.setDate(now.getDate() + daysToWindowStart);
+      endDate.setDate(now.getDate() + daysToWindowEnd);
+    }
+    
+    return {
+      startDate,
+      endDate,
+      isNextWeek: needNextWeek,
+      isCurrentlyActive: availableDays.includes(currentDay) && !needNextWeek
+    };
+  };
+
+  // Function to format date range for display with day names
+  const formatDateRangeForDisplay = (startDate, endDate) => {
+    const startOptions = { 
+      weekday: 'short',
+      day: 'numeric'
+    };
+    const endOptions = { 
+      weekday: 'short',
+      day: 'numeric', 
+      month: 'short' 
+    };
+    
+    // If same month, show "Mon 16 - Wed 18 Dec"
+    if (startDate.getMonth() === endDate.getMonth()) {
+      const startDay = startDate.toLocaleDateString('en-IN', startOptions);
+      const endDay = endDate.toLocaleDateString('en-IN', endOptions);
+      return `${startDay} - ${endDay}`;
+    } else {
+      // If different months, show "Mon 30 Nov - Wed 2 Dec"
+      const startOptions = { 
+        weekday: 'short',
+        day: 'numeric', 
+        month: 'short' 
+      };
+      const startDay = startDate.toLocaleDateString('en-IN', startOptions);
+      const endDay = endDate.toLocaleDateString('en-IN', endOptions);
+      return `${startDay} - ${endDay}`;
+    }
+  };
+
+  // Function to check if window is available in current period
+  const isWindowCurrentlyAvailable = (windowName) => {
+    const windowInfo = getWindowDateRange(windowName);
+    return windowInfo ? windowInfo.isCurrentlyActive : false;
+  };
+
   // Load appointment windows on component mount
   useEffect(() => {
     const fetchAvailabilityWindows = async () => {
@@ -303,20 +454,60 @@ const BookingModal = ({
                       </div>
                     ) : appointmentWindows.length > 0 ? (
                       <div className="grid grid-cols-1 gap-3">
-                        {appointmentWindows.map((window) => (
-                          <button
-                            key={window._id}
-                            type="button"
-                            onClick={() => handleWindowSelect(window.windowName)}
-                            className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer border-2 ${
-                              selectedWindow === window.windowName
-                                ? 'bg-[#5B2655] text-white border-[#5B2655] shadow-md transform scale-105'
-                                : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200 hover:border-[#5B2655]'
-                            }`}
-                          >
-                            {window.windowName}
-                          </button>
-                        ))}
+                        {appointmentWindows.map((window) => {
+                          const windowInfo = getWindowDateRange(window.windowName);
+                          const isCurrentlyAvailable = isWindowCurrentlyAvailable(window.windowName);
+                          
+                          if (!windowInfo) return null;
+                          
+                          return (
+                            <button
+                              key={window._id}
+                              type="button"
+                              onClick={() => handleWindowSelect(window.windowName)}
+                              className={`px-4 py-3 rounded-lg text-left transition-all duration-200 cursor-pointer border-2 ${
+                                selectedWindow === window.windowName
+                                  ? 'bg-[#5B2655] text-white border-[#5B2655] shadow-md transform scale-105'
+                                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200 hover:border-[#5B2655]'
+                              }`}
+                            >
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <div className="font-medium text-sm">
+                                    {window.windowName}
+                                  </div>
+                                  <div className={`text-xs mt-1 ${
+                                    selectedWindow === window.windowName 
+                                      ? 'text-white/80' 
+                                      : 'text-gray-500'
+                                  }`}>
+                                    {formatDateRangeForDisplay(windowInfo.startDate, windowInfo.endDate)}
+                                    {windowInfo.isNextWeek ? (
+                                      <span className="ml-2 text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">
+                                        Next Week
+                                      </span>
+                                    ) : isCurrentlyAvailable ? (
+                                      <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">
+                                        Active Now
+                                      </span>
+                                    ) : (
+                                      <span className="ml-2 text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+                                        This Week
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className={`text-xs px-2 py-1 rounded-full ${
+                                  selectedWindow === window.windowName
+                                    ? 'bg-white/20 text-white'
+                                    : 'bg-green-100 text-green-600'
+                                }`}>
+                                  Available
+                                </div>
+                              </div>
+                            </button>
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="text-center py-4 bg-gray-50 rounded-lg">
@@ -336,6 +527,13 @@ const BookingModal = ({
                         <p className="font-medium text-gray-800">{selectedDuration} minutes</p>
                         <span className="text-sm text-gray-600 mt-1 block">Appointment Window:</span>
                         <p className="font-medium text-gray-800">{selectedWindow}</p>
+                        <span className="text-sm text-gray-600 mt-1 block">Available Period:</span>
+                        <p className="font-medium text-[#5B2655]">
+                          {(() => {
+                            const windowInfo = getWindowDateRange(selectedWindow);
+                            return windowInfo ? formatDateRangeForDisplay(windowInfo.startDate, windowInfo.endDate) : '';
+                          })()}
+                        </p>
                       </div>
                       <div className="text-right">
                         <span className="text-sm text-gray-600">Total Price:</span>
