@@ -52,10 +52,10 @@ const FAQ = () => {
                             FAQ
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         Questions Answered
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         If you don't see your question answered here, please get
                         in touch.
                     </p>
@@ -79,7 +79,7 @@ const FAQ = () => {
                                 onClick={() => toggleFAQ(index)}
                                 aria-expanded={activeIndex === index}
                             >
-                                <span className="text-base md:text-lg font-medium text-gray-800 pr-4 group-hover:text-[#5B2655] transition-colors duration-300">
+                                <span className="font-serif text-base md:text-xl font-medium  text-gray-800 pr-4 group-hover:text-[#5B2655] transition-colors duration-300">
                                     {item.question}
                                 </span>
                                 <span className="flex-shrink-0 ml-2">
@@ -109,7 +109,7 @@ const FAQ = () => {
                                         : "max-h-0 opacity-0"
                                 }`}
                             >
-                                <p className="text-sm md:text-base text-gray-600 leading-relaxed pl-4">
+                                <p className="text-sm md:text-xl font-light text-gray-600 leading-relaxed pl-4">
                                     {item.answer}
                                 </p>
                             </div>

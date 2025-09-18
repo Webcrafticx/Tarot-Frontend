@@ -12,14 +12,9 @@ export default {
                 darkbrown: "#302513",
             },
             fontFamily: {
-                sans: ["Poppins", "sans-serif"], // Global default
-                serif: ["Lora", "serif"],
-                dosis: ["Dosis", "sans-serif"],
-                roboto: ["Roboto", "sans-serif"],
-                grotesk: ["Space Grotesk", "sans-serif"],
-                worksans: ["Work Sans", "sans-serif"],
-                devnagri: ["Noto Sans Devanagari", "sans-serif"],
-            },
+  sans: ["Poppins", "sans-serif"],  // Default = Poppins
+  serif: ["Lora", "serif"],         // For headings
+}
         },
     },
     plugins: [],

@@ -89,10 +89,10 @@ const Testimonials = () => {
                             Testimonials
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         What Clients Say
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         Real experiences from people who found their path to
                         healing.
                     </p>
@@ -139,7 +139,7 @@ const Testimonials = () => {
                                             </blockquote>
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="font-semibold text-gray-800 text-sm md:text-base transition-colors duration-300 group-hover:text-[#5B2655]">
+                                                    <p className="font-serif text-gray-800 text-sm md:text-lg transition-colors duration-300 group-hover:text-[#5B2655]">
                                                         {testimonial.name}
                                                     </p>
                                                     <p className="text-xs md:text-sm text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
@@ -162,14 +162,14 @@ const Testimonials = () => {
                         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 hover:scale-110 hover:shadow-xl"
                         aria-label="Previous testimonial"
                     >
-                        <ChevronLeft className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300" />
+                        <ChevronLeft className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300 cursor-pointer" />
                     </button>
                     <button
                         onClick={nextSlide}
                         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 hover:scale-110 hover:shadow-xl"
                         aria-label="Next testimonial"
                     >
-                        <ChevronRight className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300" />
+                        <ChevronRight className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300 cursor-pointer" />
                     </button>
                 </div>
 

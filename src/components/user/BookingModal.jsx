@@ -306,8 +306,8 @@ const BookingModal = ({
         {/* Fixed Header */}
         <div className="flex justify-between items-center p-6 pb-4 border-b border-gray-100">
           <div>
-            <h3 className="text-xl font-bold text-gray-800">Book {selectedService.title}</h3>
-            <p className="text-sm text-gray-500 mt-1">Fill in your details to proceed</p>
+            <h3 className="text-2xl font-serif text-gray-800">Book {selectedService.title}</h3>
+            <p className="text-md text-gray-500 mt-1">Fill in your details to proceed</p>
           </div>
           <button 
             onClick={closeModal}
@@ -322,7 +322,7 @@ const BookingModal = ({
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Personal Information Section */}
             <div className="space-y-4">
-              <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2">
+              <h4 className="text-md font-serif text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-2">
                 Personal Information
               </h4>
               

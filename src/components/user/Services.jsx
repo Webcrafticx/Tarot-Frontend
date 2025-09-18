@@ -151,10 +151,10 @@ const Services = () => {
                             Services
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-1500">
+                    <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-1500">
                         How I Can Serve You
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         All services available in-person and online for maximum
                         flexibility.
                     </p>
@@ -191,10 +191,10 @@ const Services = () => {
 
                                 {/* Service Content */}
                                 <div className="px-2">
-                                    <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 md:mb-3 uppercase tracking-wide leading-tight group-hover:text-[#5B2655] transition-colors duration-300">
+                                    <h3 className="font-serif text-base md:text-2xl text-gray-800 mb-2 md:mb-3 uppercase tracking-wide leading-tight group-hover:text-[#5B2655] transition-colors duration-300">
                                         {service.title}
                                     </h3>
-                                    <p className="text-sm md:text-sm text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto mb-4 group-hover:text-gray-800 transition-colors duration-300">
+                                    <p className="text-sm md:text-lg text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto mb-4 group-hover:text-gray-800 transition-colors duration-300">
                                         {service.description}
                                     </p>
 
@@ -222,7 +222,7 @@ const Services = () => {
                             : "translate-y-4 opacity-0"
                     }`}
                 >
-                    <blockquote className="text-lg md:text-xl lg:text-4xl font-medium text-gray-700 italic leading-relaxed max-w-3xl mx-auto hover:text-[#5B2655] transition-colors duration-300 cursor-default">
+                    <blockquote className="font-serif text-lg md:text-xl lg:text-5xl font-medium text-gray-700 italic leading-relaxed max-w-4xl mx-auto hover:text-[#5B2655] transition-colors duration-300 cursor-default">
                         "I hold a space for you to be fully seen and heard—this
                         is when healing begins."
                     </blockquote>

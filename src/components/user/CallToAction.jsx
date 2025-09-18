@@ -15,7 +15,7 @@ const CallToAction = () => {
                 {/* Single CTA Card */}
                 <div className="w-full max-w-6xl mx-auto transform transition-all duration-700 ease-in-out">
                     <div
-                        className={`bg-gradient-to-br from-[#1B0F1E] to-[#2A1B2E] rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 text-white shadow-2xl transform transition-all duration-700 ease-in-out ${
+                        className={`bg-gradient-to-br from-[#1B0F1E] to-[#2A1B2E] rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-16 text-white shadow-2xl transform transition-all duration-700 ease-in-out ${
                             ctaVisible
                                 ? "translate-y-0 opacity-100 scale-100"
                                 : "translate-y-4 opacity-0 scale-95"
@@ -30,11 +30,11 @@ const CallToAction = () => {
                                         : "translate-y-4 opacity-0"
                                 }`}
                             >
-                                <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold leading-tight mb-3 md:mb-4 transform transition-all duration-700 ease-in-out delay-200 hover:text-[#C2B6C1]">
+                                <h2 className="font-serif text-xl md:text-2xl lg:text-3xl xl:text-5xl leading-tight mb-3 md:mb-4 transform transition-all duration-700 ease-in-out delay-200 hover:text-[#C2B6C1]">
                                     Take your first step towards peace and
                                     fulfilment...
                                 </h2>
-                                <p className="text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed transform transition-all duration-700 ease-in-out delay-300 hover:text-white">
+                                <p className="text-sm md:text-base lg:text-xl text-gray-200 leading-relaxed transform transition-all duration-700 ease-in-out delay-300 hover:text-white">
                                     Ready to get started or still have some
                                     questions? Perfect. Book a call today and we
                                     can begin your journey of self-exploration.
@@ -62,9 +62,9 @@ const CallToAction = () => {
                                                 });
                                             }
                                         }}
-                                        className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:from-[#814E7A] hover:to-[#5B2655] text-white px-4 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold tracking-wider transition-all duration-300 ease-in-out hover:scale-105 uppercase whitespace-nowrap cursor-pointer"
+                                        className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:from-[#814E7A] hover:to-[#5B2655] text-white px-4 py-2.5 md:px-6 md:py-3 lg:px-8 lg:py-4 rounded-full text-xs md:text-sm lg:text-base font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase whitespace-nowrap cursor-pointer"
                                     >
-                                        Book My Free Consultation
+                                        Book My Consultation
                                     </button>
                                 </div>
                             </div>

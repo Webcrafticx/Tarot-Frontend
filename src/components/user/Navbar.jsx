@@ -140,25 +140,25 @@ const Navbar = () => {
                             <div className="space-y-4">
                                 <a
                                     href="#"
-                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
+                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-md font-medium transition-colors duration-200"
                                 >
                                     ABOUT
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
+                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-md font-medium transition-colors duration-200"
                                 >
                                     SERVICES
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
+                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-md font-medium transition-colors duration-200"
                                 >
                                     TESTIMONIALS
                                 </a>
                                 <a
                                     href="#"
-                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-sm font-medium transition-colors duration-200"
+                                    className="block text-start text-[#66626A] hover:text-[#5A2654] text-md font-medium transition-colors duration-200"
                                 >
                                     FAQ
                                 </a>
