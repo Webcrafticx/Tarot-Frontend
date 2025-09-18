@@ -50,10 +50,10 @@ const HowItWorks = () => {
                             How It Works
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         Just Three Easy Steps
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         Here's how we can work together to start your healing
                         journey.
                     </p>
@@ -77,17 +77,17 @@ const HowItWorks = () => {
                             >
                                 {/* Step Number */}
                                 <div className="mb-4 md:mb-6">
-                                    <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#5B2655]  transition-colors duration-300">
+                                    <span className="font-serif text-4xl md:text-5xl lg:text-8xl text-[#5B2655]  transition-colors duration-300">
                                         {step.number}
                                     </span>
                                 </div>
 
                                 {/* Step Content */}
                                 <div className="space-y-3 md:space-y-4">
-                                    <h3 className="text-base md:text-lg font-semibold text-gray-800 uppercase tracking-wide leading-tight group-hover:text-[#5B2655] transition-colors duration-300">
+                                    <h3 className="text-base md:text-2xl font-serif text-gray-800 uppercase tracking-wide leading-tight group-hover:text-[#5B2655] transition-colors duration-300">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto group-hover:text-gray-800 transition-colors duration-300">
+                                    <p className="text-sm md:text-xl text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto group-hover:text-gray-800 transition-colors duration-300">
                                         {step.description}
                                     </p>
                                 </div>

@@ -37,7 +37,7 @@ const About = () => {
                         {/* Heading */}
                         <h2
                             ref={headingRef}
-                            className={`text-2xl md:text-2xl xl:text-4xl font-semibold leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
+                            className={`font-serif text-2xl md:text-2xl xl:text-5xl leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
                                 headingVisible
                                     ? "translate-y-0 opacity-100"
                                     : "translate-y-4 opacity-0"
@@ -49,17 +49,17 @@ const About = () => {
                         {/* Description */}
                         <p
                             ref={descRef}
-                            className={`text-sm md:text-sm xl:text-lg text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
+                            className={`text-sm md:text-sm xl:text-xl text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
                                 descVisible
                                     ? "translate-y-0 opacity-100"
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            Hi, I'm Nadine, a spiritual counsellor helping you
+                            "Hi, I'm Nadine, a spiritual counsellor helping you
                             find peace, meaning, and deeper connection in life.
                             Whether you're seeking healing, spiritual growth, or
                             a renewed sense of purpose, I'm here to support you
-                            on your journey.
+                            on your journey."
                         </p>
 
                         {/* Achievements */}
@@ -73,12 +73,12 @@ const About = () => {
                         >
                             <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
                                 <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
-                                <span>Diploma in Spiritual Care</span>
+                                <span className="text-lg">Diploma in Spiritual Care</span>
                             </div>
 
                             <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
                                 <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
-                                <span>Reiki Levels I, II & III</span>
+                                <span className="text-lg">Reiki Levels I, II & III</span>
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@ const About = () => {
                                             });
                                         }
                                     }}
-                                    className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out hover:scale-105 uppercase"
+                                    className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase"
                                 >
                                     Book My Consultation
                                 </button>

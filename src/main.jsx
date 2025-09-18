@@ -3,6 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/600.css"; // optional weights
+import "@fontsource/lora/400.css";
+import "@fontsource/lora/700.css";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

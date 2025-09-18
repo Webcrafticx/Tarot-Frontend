@@ -40,7 +40,7 @@ const Footer = () => {
                                     ></path>
                                 </svg>
                             </div>
-                            <p className="text-sm text-[#66626A] leading-relaxed hover:text-[#5A2654] transition-colors duration-300">
+                            <p className="text-md text-[#66626A] leading-relaxed hover:text-[#5A2654] transition-colors duration-300">
                                 Professional consultation services to help you
                                 achieve your goals with expert guidance and
                                 support.
@@ -55,7 +55,7 @@ const Footer = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <h3 className="text-lg font-semibold text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
+                            <h3 className="font-serif text-xl text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
                                 QUICK LINKS
                             </h3>
                             <ul className="space-y-2">
@@ -71,7 +71,7 @@ const Footer = () => {
                                     >
                                         <a
                                             href={`#${link.toLowerCase()}`}
-                                            className="text-sm text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 flex items-center group"
+                                            className="text-md text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 flex items-center group"
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 const section =
@@ -101,15 +101,15 @@ const Footer = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <h3 className="text-lg font-semibold text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
+                            <h3 className="text-xl font-serif text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
                                 SERVICES
                             </h3>
                             <ul className="space-y-2">
                                 {[
-                                    "Spiritual Counseling",
-                                    "Emotional Healing",
-                                    "Personal Guidance",
-                                    "Meditation Sessions",
+                                    "Tarot Card Reading",
+                                    "Akashic Record Reading",
+                                    "Numerology Correction",
+                                    "Single Question Reading",
                                 ].map((service, index) => (
                                     <li
                                         key={index}
@@ -117,7 +117,7 @@ const Footer = () => {
                                     >
                                         <a
                                             href="#services"
-                                            className="text-sm text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 flex items-center group"
+                                            className="text-md text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 flex items-center group"
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 const section =
@@ -147,7 +147,7 @@ const Footer = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <h3 className="text-lg font-semibold text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
+                            <h3 className="text-xl  font-serif text-[#5A2654] hover:text-[#814E7A] transition-colors duration-300 cursor-default">
                                 CONTACT
                             </h3>
                             <div className="space-y-3">
@@ -163,7 +163,7 @@ const Footer = () => {
                                             clipRule="evenodd"
                                         />
                                     </svg>
-                                    <p className="text-sm text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
+                                    <p className="text-md text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
                                         123 Business Street
                                         <br />
                                         Suite 100
@@ -179,7 +179,7 @@ const Footer = () => {
                                     >
                                         <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                     </svg>
-                                    <p className="text-sm text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
+                                    <p className="text-md text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
                                         (555) 123-4567
                                     </p>
                                 </div>
@@ -192,7 +192,7 @@ const Footer = () => {
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
-                                    <p className="text-sm text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
+                                    <p className="text-md text-[#66626A] group-hover:text-[#5A2654] transition-colors duration-300">
                                         info@company.com
                                     </p>
                                 </div>

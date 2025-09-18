@@ -24,7 +24,7 @@ const HeroSection = () => {
                             {/* Category Badge */}
                             <div
                                 ref={badgeRef}
-                                className={`transform transition-all duration-700 ease-in-out ${
+                                className={`font-sans transform transition-all duration-700 ease-in-out ${
                                     badgeVisible
                                         ? "translate-y-0 opacity-100"
                                         : "translate-y-6 opacity-0"
@@ -35,35 +35,30 @@ const HeroSection = () => {
                                 </span>
                             </div>
 
-                            {/* Main Heading */}
-                            <h1
-                                ref={headingRef}
-                                className={`text-3xl sm:text-4xl lg:text-8xl font-light text-[#5A2654] leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
-                                    headingVisible
-                                        ? "translate-y-0 opacity-100"
-                                        : "translate-y-6 opacity-0"
-                                }`}
-                            >
-                                Finally Find Peace Of Mind
-                            </h1>
+                            {/* Main Heading*/}
+<h1
+  ref={headingRef}
+  className={`font-serif text-3xl sm:text-4xl lg:text-7xl font-light text-[#5A2654] leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
+    headingVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+  }`}
+>
+  Finally Find Peace Of Mind
+</h1>
 
-                            {/* Description */}
-                            <p
-                                ref={descRef}
-                                className={`text-base sm:text-lg text-[#66626A] leading-relaxed max-w-lg mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
-                                    descVisible
-                                        ? "translate-y-0 opacity-100"
-                                        : "translate-y-6 opacity-0"
-                                }`}
-                            >
-                                Helping you navigate life's challenges with
-                                wisdom, compassion, and inner peace.
-                            </p>
-
+{/* Description*/}
+<p
+  ref={descRef}
+  className={`font-sans text-base sm:text-lg text-[#66626A] leading-relaxed max-w-lg mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
+    descVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+  }`}
+>
+  Helping you navigate life's challenges with wisdom, compassion, and inner
+  peace.
+</p>
                             {/* CTA Button */}
                             <div
                                 ref={ctaRef}
-                                className={`pt-4 transform transition-all duration-700 ease-in-out delay-300 ${
+                                className={`font-sans pt-4 transform transition-all duration-700 ease-in-out delay-300 ${
                                     ctaVisible
                                         ? "translate-y-0 opacity-100"
                                         : "translate-y-6 opacity-0"
@@ -82,7 +77,7 @@ const HeroSection = () => {
                                                 });
                                             }
                                         }}
-                                        className="bg-[#5B2655] hover:bg-[#814E7A] cursor-pointer text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out hover:scale-105 uppercase"
+                                        className="bg-[#5B2655] hover:bg-[#814E7A] cursor-pointer text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out  uppercase"
                                     >
                                         Book My Consultation
                                     </button>
@@ -142,10 +137,10 @@ const HeroSection = () => {
                                         ></path>
                                     </svg>
                                 </div>
-                                <h3 className="text-lg font-semibold text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
+                                <h3 className="font-serif text-2xl  text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
                                     Emotional Healing
                                 </h3>
-                                <p className="text-sm text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
+                                <p className="font-sans text-lg text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
                                     Release stress, anxiety, and past traumas
                                 </p>
                             </div>
@@ -175,10 +170,10 @@ const HeroSection = () => {
                                         ></path>
                                     </svg>
                                 </div>
-                                <h3 className="text-lg font-semibold text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
+                                <h3 className="font-serif text-2xl text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
                                     Clarity & Purpose
                                 </h3>
-                                <p className="text-sm text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
+                                <p className="font-sans text-lg text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
                                     Gain insight into your life's direction
                                 </p>
                             </div>
@@ -208,10 +203,10 @@ const HeroSection = () => {
                                         ></path>
                                     </svg>
                                 </div>
-                                <h3 className="text-lg font-semibold text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
+                                <h3 className="font-serif text-2xl text-[#5A2654] uppercase tracking-wide group-hover:text-[#814E7A] transition-colors duration-300">
                                     Spiritual Connection
                                 </h3>
-                                <p className="text-sm text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
+                                <p className="font-sans text-lg text-[#66626A] leading-relaxed group-hover:text-[#5A2654] transition-colors duration-300">
                                     Align with your values and higher self
                                 </p>
                             </div>
