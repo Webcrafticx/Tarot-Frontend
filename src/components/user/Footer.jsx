@@ -232,6 +232,18 @@ const Footer = () => {
                                     Privacy Policy
                                 </a>
                                 <a
+                                    href="/cancellation"
+                                    className="text-xs text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 hover:underline"
+                                >
+                                    Cancellation & Refund
+                                </a>
+                                <a
+                                    href="/shipping"
+                                    className="text-xs text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 hover:underline"
+                                >
+                                    Shipping Policy
+                                </a>
+                                <a
                                     href="/terms"
                                     className="text-xs text-[#66626A] hover:text-[#5A2654] transition-colors duration-200 hover:underline"
                                 >
