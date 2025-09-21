@@ -37,23 +37,12 @@ const Privacy = () => {
                             2. How We Use Information
                         </h2>
                         <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                            <li>
-                                Scheduling and conducting spiritual counselling
-                                sessions
-                            </li>
-                            <li>
-                                Providing energy healing and Reiki treatments
-                            </li>
-                            <li>
-                                Communication regarding appointments and
-                                sessions
-                            </li>
+                            <li>Scheduling and conducting spiritual counselling sessions</li>
+                            <li>Providing energy healing and Reiki treatments</li>
+                            <li>Communication regarding appointments and sessions</li>
                             <li>Organizing workshops and retreat events</li>
                             <li>Improving our spiritual guidance services</li>
-                            <li>
-                                Sending relevant spiritual content and updates
-                                (with your consent)
-                            </li>
+                            <li>Sending relevant spiritual content and updates (with your consent)</li>
                         </ul>
                         <p className="text-gray-700 leading-7 mt-4">
                             We do <strong>not</strong> sell or share client
@@ -118,30 +107,19 @@ const Privacy = () => {
                             6. Your Rights
                         </h2>
                         <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                            <li>
-                                Request{" "}
-                                <strong>
-                                    access, modification, or deletion
-                                </strong>{" "}
-                                of your personal information
-                            </li>
-                            <li>
-                                Opt-out of marketing communications and
-                                newsletters
-                            </li>
+                            <li>Request <strong>access, modification, or deletion</strong> of your personal information</li>
+                            <li>Opt-out of marketing communications and newsletters</li>
                             <li>Request copies of your session records</li>
                             <li>Raise concerns regarding your data privacy</li>
-                            <li>
-                                Withdraw consent for data processing at any time
-                            </li>
+                            <li>Withdraw consent for data processing at any time</li>
                         </ul>
                         <p className="text-gray-700 leading-7 mt-4">
                             To exercise these rights, contact us at
                             <a
-                                href="mailto:nadine@spiritualcounselling.com"
+                                href="mailto:Raveenatarotstarr@gmail.com"
                                 className="text-[#5B2655] ml-1 hover:underline font-medium"
                             >
-                                nadine@spiritualcounselling.com
+                                Raveenatarotstarr@gmail.com
                             </a>
                         </p>
                     </div>
@@ -192,18 +170,14 @@ const Privacy = () => {
                             <p className="text-gray-700">
                                 <strong>Email:</strong>
                                 <a
-                                    href="mailto:nadine@spiritualcounselling.com"
+                                    href="mailto:Raveenatarotstarr@gmail.com"
                                     className="text-[#5B2655] ml-1 hover:underline font-medium"
                                 >
-                                    nadine@spiritualcounselling.com
+                                    Raveenatarotstarr@gmail.com
                                 </a>
                             </p>
                             <p className="text-gray-700">
-                                <strong>Phone:</strong> +91 9155286099
-                            </p>
-                            <p className="text-gray-700">
-                                <strong>Address:</strong> Ramgarh, Jharkhand,
-                                India
+                                <strong>Phone:</strong> +91 9008408625
                             </p>
                         </div>
                     </div>

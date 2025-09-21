@@ -32,15 +32,10 @@ const Terms = () => {
                             2. Services Offered
                         </h2>
                         <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                            <li>
-                                Tarot card readings for guidance and clarity
-                            </li>
+                            <li>Tarot card readings for guidance and clarity</li>
                             <li>Spiritual counselling and energy healing</li>
                             <li>Workshops, group sessions, and retreats</li>
-                            <li>
-                                Online and in-person consultations (as
-                                available)
-                            </li>
+                            <li>Online and in-person consultations (as available)</li>
                         </ul>
                     </div>
 
@@ -50,15 +45,9 @@ const Terms = () => {
                             3. Client Responsibilities
                         </h2>
                         <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                            <li>
-                                Provide accurate personal details when booking a
-                                session.
-                            </li>
+                            <li>Provide accurate personal details when booking a session.</li>
                             <li>Arrive on time for scheduled appointments.</li>
-                            <li>
-                                Respect practitioner boundaries and session
-                                guidelines.
-                            </li>
+                            <li>Respect practitioner boundaries and session guidelines.</li>
                             <li>
                                 Understand that spiritual guidance is{" "}
                                 <strong>not a substitute</strong> for medical,
@@ -73,18 +62,9 @@ const Terms = () => {
                             4. Payment Terms
                         </h2>
                         <ul className="list-disc pl-5 text-gray-700 space-y-2">
-                            <li>
-                                💳 All sessions must be paid in advance through
-                                approved payment gateways.
-                            </li>
-                            <li>
-                                💳 Bookings are confirmed only after payment is
-                                received.
-                            </li>
-                            <li>
-                                💳 Late or missed sessions are{" "}
-                                <strong>non-refundable</strong>.
-                            </li>
+                            <li>💳 All sessions must be paid in advance through approved payment gateways.</li>
+                            <li>💳 Bookings are confirmed only after payment is received.</li>
+                            <li>💳 Late or missed sessions are <strong>non-refundable</strong>.</li>
                         </ul>
                     </div>
 
@@ -109,12 +89,8 @@ const Terms = () => {
                         </h2>
                         <p className="text-gray-700 leading-7">
                             All readings, counselling, and guidance are offered
-                            for
-                            <strong>
-                                {" "}
-                                personal insight and spiritual growth
-                            </strong>
-                            . We make no guarantees of specific outcomes. You
+                            for <strong>personal insight and spiritual growth</strong>.
+                            We make no guarantees of specific outcomes. You
                             are responsible for your own decisions and actions
                             based on the guidance received.
                         </p>
@@ -145,18 +121,14 @@ const Terms = () => {
                             <p className="text-gray-700">
                                 <strong>Email:</strong>{" "}
                                 <a
-                                    href="mailto:nadine@spiritualcounselling.com"
+                                    href="mailto:Raveenatarotstarr@gmail.com"
                                     className="text-[#5B2655] ml-1 hover:underline font-medium"
                                 >
-                                    nadine@spiritualcounselling.com
+                                    Raveenatarotstarr@gmail.com
                                 </a>
                             </p>
                             <p className="text-gray-700">
-                                <strong>Phone:</strong> +91 9155286099
-                            </p>
-                            <p className="text-gray-700">
-                                <strong>Address:</strong> Ramgarh, Jharkhand,
-                                India
+                                <strong>Phone:</strong> +91 9008408625
                             </p>
                         </div>
                     </div>
