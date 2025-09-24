@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { 
   ChevronUp, ChevronDown, Calendar, MessageCircle, 
   ChevronLeft, ChevronRight,
-  Search, Phone, Clock
+  Search, Phone, Clock, MapPin
 } from "lucide-react";
 
 const AppointmentTable = ({ 
@@ -72,7 +72,8 @@ const AppointmentTable = ({
     (appointment.name?.toLowerCase() || '').includes(search.toLowerCase()) ||
     (appointment.email?.toLowerCase() || '').includes(search.toLowerCase()) ||
     (appointment.phone?.toLowerCase() || '').includes(search.toLowerCase()) ||
-    (appointment.serviceType?.toLowerCase() || '').includes(search.toLowerCase())
+    (appointment.serviceType?.toLowerCase() || '').includes(search.toLowerCase()) ||
+    (appointment.location?.toLowerCase() || '').includes(search.toLowerCase())
   );
 
   // Sort appointments
@@ -109,6 +110,19 @@ const AppointmentTable = ({
       
       return sortConfig.direction === 'ascending' ? 
         valueA - valueB : valueB - valueA;
+    }
+
+    if (sortConfig.key === 'location') {
+      const valueA = a.location?.toLowerCase() || '';
+      const valueB = b.location?.toLowerCase() || '';
+      
+      if (valueA < valueB) {
+        return sortConfig.direction === 'ascending' ? -1 : 1;
+      }
+      if (valueA > valueB) {
+        return sortConfig.direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
     }
 
     const valueA = a[sortConfig.key] || '';
@@ -178,7 +192,7 @@ const AppointmentTable = ({
         <button
           key={i}
           onClick={() => goToPage(i)}
-          className={`px-2 py-1 rounded-md text-xs sm:text-sm ${
+          className={`px-2 py-1 rounded-md text-xs sm:text-sm cursor-pointer ${
             currentPage === i
               ? 'bg-purple-600 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -192,6 +206,11 @@ const AppointmentTable = ({
     return buttons;
   };
 
+  // Get display date - use selectedWindowDates.displayDate if available, otherwise fallback to selectedWindow
+  const getDisplayDate = (appointment) => {
+    return appointment.selectedWindowDates?.displayDate || appointment.selectedWindow || 'N/A';
+  };
+
   if (error && appointments.length === 0) {
     return (
       <div className="mt-4 px-4 sm:px-6">
@@ -200,7 +219,7 @@ const AppointmentTable = ({
             <span className="text-sm">Error: {error}</span>
             <button 
               onClick={() => fetchAppointments(currentPage, itemsPerPage)}
-              className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm flex items-center"
+              className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm flex items-center cursor-pointer"
             >
               Try Again
             </button>
@@ -249,7 +268,7 @@ const AppointmentTable = ({
             <span className="text-sm">Note: {error}</span>
             <button 
               onClick={() => fetchAppointments(currentPage, itemsPerPage)}
-              className="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 text-sm"
+              className="px-3 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 text-sm cursor-pointer"
             >
               Retry
             </button>
@@ -292,10 +311,19 @@ const AppointmentTable = ({
                 </th>
                 <th 
                   className="py-3 px-2 sm:px-4 font-medium hover:bg-gray-50 whitespace-nowrap cursor-pointer"
+                  onClick={() => requestSort('location')}
+                >
+                  <div className="flex items-center gap-1">
+                    Location
+                    {getSortIcon('location')}
+                  </div>
+                </th>
+                <th 
+                  className="py-3 px-2 sm:px-4 font-medium hover:bg-gray-50 whitespace-nowrap cursor-pointer"
                   onClick={() => requestSort('selectedWindow')}
                 >
                   <div className="flex items-center gap-1">
-                    Day Window
+                    Date Window
                     {getSortIcon('selectedWindow')}
                   </div>
                 </th>
@@ -332,7 +360,7 @@ const AppointmentTable = ({
             <tbody className="divide-y divide-gray-200 text-xs sm:text-sm text-gray-700">
               {currentAppointments.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="py-8 text-center text-gray-500">
+                  <td colSpan="9" className="py-8 text-center text-gray-500 cursor-default">
                     No appointments found
                   </td>
                 </tr>
@@ -341,29 +369,35 @@ const AppointmentTable = ({
                   <tr key={appointment._id} className="hover:bg-gray-50 cursor-default">
                     <td className="py-4 px-2 sm:px-4">
                       <div>
-                        <div className="font-medium text-gray-900">{appointment.name || 'N/A'}</div>
-                        <div className="text-xs text-gray-500 truncate max-w-[120px] sm:max-w-none">{appointment.email || 'N/A'}</div>
+                        <div className="font-medium text-gray-900 cursor-default">{appointment.name || 'N/A'}</div>
+                        <div className="text-xs text-gray-500 truncate max-w-[120px] sm:max-w-none cursor-default">{appointment.email || 'N/A'}</div>
                       </div>
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       {appointment.phone || 'N/A'}
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap capitalize">{appointment.serviceType || 'N/A'}</td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap capitalize cursor-default">{appointment.serviceType || 'N/A'}</td>
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
-                        {appointment.selectedWindow || 'N/A'}
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
+                        {appointment.location || 'N/A'}
                       </div>
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
+                        {getDisplayDate(appointment)}
+                      </div>
+                    </td>
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       {formatDuration(appointment.duration)}
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       <div className="flex items-center gap-1">
                         {formatPrice(appointment.price)}
                       </div>
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       {renderPaymentStatusBadge(appointment.paymentStatus)}
                     </td>
                     <td className="py-4 px-2 sm:px-4 whitespace-nowrap">
@@ -371,7 +405,7 @@ const AppointmentTable = ({
                         {appointment.phone && (
                           <button
                             onClick={() => handleWhatsAppClick(appointment.phone)}
-                            className="text-green-600 hover:text-green-800 cursor-pointer p-1 rounded hover:bg-green-50"
+                            className="text-green-600 hover:text-green-800 cursor-pointer p-1 rounded hover:bg-green-50 transition-colors"
                             title="Message on WhatsApp"
                           >
                             <MessageCircle className="w-4 h-4" />
@@ -389,7 +423,7 @@ const AppointmentTable = ({
         {/* Pagination */}
         {currentAppointments.length > 0 && (
           <div className="flex flex-col sm:flex-row items-center justify-between mt-4 sm:mt-6 pt-4 border-t border-gray-200">
-            <div className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-0">
+            <div className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-0 cursor-default">
               Showing {startIndex + 1} to {Math.min(endIndex, totalItems)} of {totalItems} entries
             </div>
             
@@ -397,7 +431,7 @@ const AppointmentTable = ({
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
@@ -407,7 +441,7 @@ const AppointmentTable = ({
               <button
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer transition-colors"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
@@ -419,7 +453,7 @@ const AppointmentTable = ({
       {/* Mobile Card View */}
       <div className="md:hidden space-y-4">
         {currentAppointments.length === 0 ? (
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 text-center text-gray-500 py-8">
+          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 text-center text-gray-500 py-8 cursor-default">
             No appointments found
           </div>
         ) : (
@@ -430,28 +464,32 @@ const AppointmentTable = ({
                 onClick={() => toggleRowExpansion(appointment._id)}
               >
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900 text-sm">{appointment.name || 'N/A'}</div>
-                  <div className="text-xs text-gray-500 mt-1 capitalize">{appointment.serviceType || 'N/A'}</div>
+                  <div className="font-medium text-gray-900 text-sm cursor-pointer">{appointment.name || 'N/A'}</div>
+                  <div className="text-xs text-gray-500 mt-1 capitalize cursor-pointer">{appointment.serviceType || 'N/A'}</div>
                 </div>
                 <ChevronDown 
-                  className={`w-4 h-4 text-gray-500 transition-transform ${expandedRow === appointment._id ? 'rotate-180' : ''}`} 
+                  className={`w-4 h-4 text-gray-500 transition-transform cursor-pointer ${expandedRow === appointment._id ? 'rotate-180' : ''}`} 
                 />
               </div>
               
               <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
-                <div className="flex items-center gap-1 text-gray-600">
+                <div className="flex items-center gap-1 text-gray-600 cursor-default">
                   <Phone className="w-3 h-3" />
                   <span>{appointment.phone || 'N/A'}</span>
                 </div>
-                <div className="flex items-center gap-1 text-gray-600">
-                  <Calendar className="w-3 h-3" />
-                  <span className="truncate">{appointment.selectedWindow || 'N/A'}</span>
+                <div className="flex items-center gap-1 text-gray-600 cursor-default">
+                  <MapPin className="w-3 h-3" />
+                  <span className="truncate">{appointment.location || 'N/A'}</span>
                 </div>
-                <div className="flex items-center gap-1 text-gray-600">
+                <div className="flex items-center gap-1 text-gray-600 cursor-default">
+                  <Calendar className="w-3 h-3" />
+                  <span className="truncate">{getDisplayDate(appointment)}</span>
+                </div>
+                <div className="flex items-center gap-1 text-gray-600 cursor-default">
                   <Clock className="w-3 h-3" />
                   <span>{formatDuration(appointment.duration)}</span>
                 </div>
-                <div className="flex items-center gap-1 text-gray-600">
+                <div className="flex items-center gap-1 text-gray-600 cursor-default">
                   <span>{formatPrice(appointment.price)}</span>
                 </div>
               </div>
@@ -459,19 +497,27 @@ const AppointmentTable = ({
               {expandedRow === appointment._id && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs font-medium text-gray-700">Payment Status:</span>
+                    <span className="text-xs font-medium text-gray-700 cursor-default">Payment Status:</span>
                     {renderPaymentStatusBadge(appointment.paymentStatus)}
                   </div>
                   
-                  <div className="text-xs text-gray-600 mb-2">
+                  <div className="text-xs text-gray-600 mb-2 cursor-default">
                     <span className="font-medium">Email:</span> {appointment.email || 'N/A'}
+                  </div>
+                  
+                  <div className="text-xs text-gray-600 mb-2 cursor-default">
+                    <span className="font-medium">Location:</span> {appointment.location || 'N/A'}
+                  </div>
+                  
+                  <div className="text-xs text-gray-600 mb-2 cursor-default">
+                    <span className="font-medium">Date Window:</span> {getDisplayDate(appointment)}
                   </div>
                   
                   <div className="flex justify-end mt-3">
                     {appointment.phone && (
                       <button
                         onClick={() => handleWhatsAppClick(appointment.phone)}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-green-100 text-green-700 rounded-md text-xs hover:bg-green-200"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-green-100 text-green-700 rounded-md text-xs hover:bg-green-200 cursor-pointer transition-colors"
                       >
                         <MessageCircle className="w-3 h-3" />
                         WhatsApp
@@ -487,7 +533,7 @@ const AppointmentTable = ({
         {/* Mobile Pagination */}
         {currentAppointments.length > 0 && (
           <div className="flex flex-col items-center justify-between mt-4 pt-4 border-t border-gray-200">
-            <div className="text-xs text-gray-600 mb-4">
+            <div className="text-xs text-gray-600 mb-4 cursor-default">
               Showing {startIndex + 1} to {Math.min(endIndex, totalItems)} of {totalItems} entries
             </div>
             
@@ -495,19 +541,19 @@ const AppointmentTable = ({
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               
-              <span className="text-xs text-gray-700">
+              <span className="text-xs text-gray-700 cursor-default">
                 Page {currentPage} of {totalPages}
               </span>
               
               <button
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer"
+                className="p-1 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 cursor-pointer transition-colors"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
