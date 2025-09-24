@@ -1,4 +1,4 @@
-// src/services/appointment.js
+// services/appointment.js
 import axios from "axios";
 import API_BASE_URL from "../config/api";
 
@@ -14,24 +14,48 @@ export const createPaymentOrder = async (appointmentData) => {
         },
       }
     );
+    
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: error.message || "Network error. Please try again." };
   }
 };
 
-// Verify payment and create appointment
-export const verifyPayment = async (paymentData) => {
+// Verify payment and create appointment - UPDATED with dates
+export const verifyPayment = async (razorpayResponse, appointmentData) => {
   try {
+    // Create the exact payload structure with dates
+    const verificationData = {
+      razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+      razorpay_order_id: razorpayResponse.razorpay_order_id,
+      razorpay_signature: razorpayResponse.razorpay_signature,
+      appointmentData: {
+        name: appointmentData.name,
+        email: appointmentData.email,
+        phone: appointmentData.phone,
+        serviceType: appointmentData.serviceType,
+        selectedWindow: appointmentData.selectedWindow,
+        selectedWindowDates: appointmentData.selectedWindowDates,
+        duration: appointmentData.duration,
+        price: appointmentData.price,
+        location: appointmentData.location
+      }
+    };
+
     const response = await axios.post(
       `${API_BASE_URL}/payment/verify`,
-      paymentData,
+      verificationData,
       {
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
+    
+    if (!response.data.success) {
+      throw new Error(response.data.message || "Payment verification failed");
+    }
+    
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: error.message || "Payment verification failed." };

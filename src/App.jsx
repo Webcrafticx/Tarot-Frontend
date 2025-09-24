@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Window from "./pages/Window";
-import Login from "./pages/Login";
-import Privacy from "./components/user/Privacy";
-import Terms from "./components/user/Terms";
-import CancellationRefund from "./components/user/CancellationRefund";
-import ShippingPolicy from "./components/user/ShippingPolicy";
+import Home from "./pages/user/Home";
+import Dashboard from "./pages/admin/Dashboard";
+import Window from "./pages/admin/Window";
+import Login from "./pages/user/Login";
+import Privacy from "./pages/legal/Privacy";
+import Terms from "./pages/legal/Terms";
+import CancellationRefund from "./pages/legal/Terms";
+import ShippingPolicy from "./pages/legal/ShippingPolicy";
 
 const App = () => {
     return (

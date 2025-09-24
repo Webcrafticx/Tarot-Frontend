@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Container from "../../ui/Container";
-import { useInView } from "../user/UseInView"; // adjust path if needed
+import Container from "../../../ui/Container";
+import { useInView } from "../../../ui/UseInView";
 
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);

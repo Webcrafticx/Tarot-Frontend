@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../../ui/Container";
-import { useInView } from "../user/UseInView"; // adjust path if needed
+import Container from "../../../ui/Container";
+import { useInView } from "../../../ui/UseInView";
 
 const HowItWorks = () => {
     const [headerRef, headerVisible] = useInView();
@@ -10,23 +10,23 @@ const HowItWorks = () => {
         {
             id: 1,
             number: "1.",
-            title: "FREE CONSULTATION",
+            title: "DISCOVERY CALL",
             description:
-                "We start with a free conversation to discuss your needs and explore how I can support your journey.",
+                "Begin with a complimentary connection call where we explore your intentions and see if we're aligned to work together.",
         },
         {
             id: 2,
             number: "2.",
-            title: "COUNSELLING PLAN",
+            title: "PERSONALIZED PATH",
             description:
-                "Together, we create a personalized approach tailored to your specific goals and healing needs.",
+                "I design a customized spiritual roadmap specifically for your unique journey and transformation goals.",
         },
         {
             id: 3,
             number: "3.",
-            title: "YOUR HEALING BEGINS",
+            title: "TRANSFORMATION BEGINS",
             description:
-                "We begin our work together, supporting you through your transformation and growth.",
+                "We embark on your healing journey together, creating meaningful shifts and lasting inner change.",
         },
     ];
 
@@ -47,15 +47,14 @@ const HowItWorks = () => {
                 >
                     <div className="mb-4">
                         <span className="bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-gray-300 transition-colors duration-300 cursor-default">
-                            How It Works
+                            Your Journey
                         </span>
                     </div>
                     <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
-                        Just Three Easy Steps
+                        Your Path to Transformation
                     </h2>
                     <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
-                        Here's how we can work together to start your healing
-                        journey.
+                        A simple, guided process to support your spiritual growth and personal evolution.
                     </p>
                 </div>
 
@@ -138,9 +137,9 @@ const HowItWorks = () => {
                                     });
                                 }
                             }}
-                            className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out hover:scale-105 uppercase"
+                            className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase"
                         >
-                            Start My Free Consultation
+                            Schedule Discovery Call
                         </button>
                     </div>
                 </div>

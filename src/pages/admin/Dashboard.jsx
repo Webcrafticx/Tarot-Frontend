@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react'
-import AdminLayout from '../layout/AdminLayout'
-import { getAllAppointments } from '../services/appointment'
+import AdminLayout from '../../layout/AdminLayout'
+import { getAllAppointments } from '../../services/appointment'
 import { Loader } from 'lucide-react'
 
 // Lazy imports (code splitting)
-const Overview = lazy(() => import('../components/admin/Overview'))
-const AppointmentTable = lazy(() => import('../components/admin/AppointmentTable'))
+const Overview = lazy(() => import('../../components/admin/section/Overview'))
+const AppointmentTable = lazy(() => import('../../components/admin/section/AppointmentTable'))
 
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);

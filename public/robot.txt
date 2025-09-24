@@ -1,0 +1,18 @@
+# Allow all search engines to crawl main pages, block sensitive areas
+
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /dashboard/
+Disallow: /window/
+
+
+
+# Allow CSS, JS, images to be crawled for proper indexing
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Sitemap location
+Sitemap: https://www.raveenatarotstarr.com/sitemap.xml

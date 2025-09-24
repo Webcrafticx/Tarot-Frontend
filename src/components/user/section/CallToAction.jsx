@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../../ui/Container";
-import { useInView } from "../user/UseInView"; // adjust path if needed
+import Container from "../../../ui/Container";
+import { useInView } from "../../../ui/UseInView";
 
 const CallToAction = () => {
     const [ctaRef, ctaVisible] = useInView();

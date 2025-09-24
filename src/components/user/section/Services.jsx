@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Container from "../../ui/Container";
-import BookingModal from "./BookingModal";
-import servicesData from "./services.json";
-import countryCodesData from "./countryCodes.json";
-import { useInView } from "../user/UseInView"; // adjust path
+import Container from "../../../ui/Container";
+import BookingModal from "../booking/BookingModal";
+import servicesData from "../../../json/services.json";
+import countryCodesData from "../../../json/countryCodes.json";
+import { useInView } from "../../../ui/UseInView";
 
 const Services = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -104,7 +104,7 @@ const Services = () => {
         });
 
         alert(
-            `Booking confirmed for ${selectedService.title} - ${formData.duration} minutes. Price: ₹${price}`
+            `Session confirmed for ${selectedService.title} - ${formData.duration} minutes. Investment: ₹${price}`
         );
         closeModal();
     };
@@ -148,15 +148,14 @@ const Services = () => {
                 >
                     <div className="mb-4">
                         <span className="bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-gray-300 transition-colors duration-300 cursor-default">
-                            Services
+                            Transformational Sessions
                         </span>
                     </div>
                     <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-1500">
-                        How I Can Serve You
+                        Your Path to Wholeness
                     </h2>
                     <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
-                        All services available in-person and online for maximum
-                        flexibility.
+                        Personalized guidance available worldwide through in-person and virtual sessions.
                     </p>
                 </div>
 
@@ -223,8 +222,7 @@ const Services = () => {
                     }`}
                 >
                     <blockquote className="font-serif text-lg md:text-xl lg:text-5xl font-medium text-gray-700 italic leading-relaxed max-w-4xl mx-auto hover:text-[#5B2655] transition-colors duration-300 cursor-default">
-                        "I hold a space for you to be fully seen and heard—this
-                        is when healing begins."
+                        "True transformation begins when we create space for your authentic self to emerge and flourish."
                     </blockquote>
                 </div>
             </div>
