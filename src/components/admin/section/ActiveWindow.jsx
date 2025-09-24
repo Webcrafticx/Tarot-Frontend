@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAvailabilityWindows, setAvailability } from "../../services/window";
+import { getAvailabilityWindows, setAvailability } from "../../../services/window";
 
 const dayMap = {
   Mon: "Monday",

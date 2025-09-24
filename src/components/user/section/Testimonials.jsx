@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Container from "../../ui/Container";
+import Container from "../../../ui/Container";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import testimonialsData from "./testimonialsData.json";
-import { useInView } from "../user/UseInView"; // adjust path
+import testimonialsData from "../../../json/testimonialsData.json";
+import { useInView } from "../../../ui/UseInView";
 
 const Testimonials = () => {
     const testimonials = testimonialsData.testimonials;

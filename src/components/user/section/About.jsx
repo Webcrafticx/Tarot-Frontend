@@ -1,7 +1,7 @@
 import React from "react";
-import Container from "../../ui/Container";
+import Container from "../../../ui/Container";
 import { SlBadge } from "react-icons/sl";
-import { useInView } from "../user/UseInView"; // adjust path if needed
+import { useInView } from "../../../ui/UseInView";
 
 const About = () => {
     const [badgeRef, badgeVisible] = useInView();
@@ -55,11 +55,7 @@ const About = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            "Hi, I'm Nadine, a spiritual counsellor helping you
-                            find peace, meaning, and deeper connection in life.
-                            Whether you're seeking healing, spiritual growth, or
-                            a renewed sense of purpose, I'm here to support you
-                            on your journey."
+                            "Hi, I’m Raveena  — a Tarot card reader, Numerologist, and Akashic Record reader. I guide you to clarity, healing, and alignment by helping release blockages and connect more deeply with your true path"
                         </p>
 
                         {/* Achievements */}
@@ -73,12 +69,12 @@ const About = () => {
                         >
                             <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
                                 <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
-                                <span className="text-lg">Diploma in Spiritual Care</span>
+                                <span className="text-lg">Spells and Remedies Expert</span>
                             </div>
 
                             <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
                                 <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
-                                <span className="text-lg">Reiki Levels I, II & III</span>
+                                <span className="text-lg">Guided over 24k souls globally</span>
                             </div>
                         </div>
 
@@ -123,7 +119,7 @@ const About = () => {
                         <div className="md:hidden relative w-44 h-56 sm:w-48 sm:h-72 md:w-56 md:h-80 transform hover:scale-105 transition-transform duration-500 cursor-pointer">
                             <div className="rounded-t-full overflow-hidden border-4 border-[#C2B6C1] w-full h-full hover:border-white transition-colors duration-300">
                                 <img
-                                    src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                    src="/user/about.jpg"
                                     alt="Therapist Portrait"
                                     className="w-full h-full object-cover"
                                 />
@@ -135,7 +131,7 @@ const About = () => {
                             <div className="rounded-t-full overflow-hidden border-4 border-[#824E1A] w-full h-full shadow-2xl p-2 hover:border-[#A56B2C] transition-colors duration-300">
                                 <div className="rounded-t-full overflow-hidden w-full h-full shadow-2xl">
                                     <img
-                                        src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                        src="/user/about.jpg"
                                         alt="Therapist Portrait"
                                         className="w-full h-full object-cover"
                                     />
