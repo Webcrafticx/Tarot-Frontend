@@ -34,7 +34,7 @@ const HowItWorks = () => {
         <Container>
             <div
                 id="how-it-works"
-                className="min-h-screen bg-gradient-to-b p-4 from-[#E1D9CB] to-[#F5F3EF] rounded-4xl"
+                className="min-h-screen bg-gradient-to-b p-4 from-[#F0EDF0] to-[#F8F6F7] rounded-4xl"
             >
                 {/* Header Section */}
                 <div
@@ -46,14 +46,14 @@ const HowItWorks = () => {
                     }`}
                 >
                     <div className="mb-4">
-                        <span className="bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-gray-300 transition-colors duration-300 cursor-default">
+                        <span className="bg-white text-[#66626A] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-[#E8C5D7] hover:text-[#4A6FA5] transition-colors duration-300 cursor-default">
                             Your Journey
                         </span>
                     </div>
-                    <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-[#4A6FA5] mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         Your Path to Transformation
                     </h2>
-                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-[#66626A] max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         A simple, guided process to support your spiritual growth and personal evolution.
                     </p>
                 </div>
@@ -66,7 +66,7 @@ const HowItWorks = () => {
                             <div
                                 key={step.id}
                                 ref={stepRef}
-                                className={`relative text-center group cursor-pointer p-6 rounded-xl  transform transition-all duration-700 ease-in-out delay-${
+                                className={`relative text-center group cursor-pointer p-6 rounded-xl  transition-all duration-300 transform transition-all duration-700 ease-in-out delay-${
                                     index * 200
                                 } ${
                                     stepVisible
@@ -76,17 +76,17 @@ const HowItWorks = () => {
                             >
                                 {/* Step Number */}
                                 <div className="mb-4 md:mb-6">
-                                    <span className="font-serif text-4xl md:text-5xl lg:text-8xl text-[#5B2655]  transition-colors duration-300">
+                                    <span className="font-serif text-4xl md:text-5xl lg:text-8xl text-[#4A6FA5] group-hover:text-[#7D4E7A] transition-colors duration-300">
                                         {step.number}
                                     </span>
                                 </div>
 
                                 {/* Step Content */}
                                 <div className="space-y-3 md:space-y-4">
-                                    <h3 className="text-base md:text-2xl font-serif text-gray-800 uppercase tracking-wide leading-tight group-hover:text-[#5B2655] transition-colors duration-300">
+                                    <h3 className="text-base md:text-2xl font-serif text-[#4A6FA5] uppercase tracking-wide leading-tight group-hover:text-[#7D4E7A] transition-colors duration-300">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm md:text-xl text-gray-600 leading-relaxed max-w-xs md:max-w-none mx-auto group-hover:text-gray-800 transition-colors duration-300">
+                                    <p className="text-sm md:text-xl text-[#66626A] leading-relaxed max-w-xs md:max-w-none mx-auto group-hover:text-[#4A6FA5] transition-colors duration-300">
                                         {step.description}
                                     </p>
                                 </div>
@@ -97,7 +97,7 @@ const HowItWorks = () => {
                                         <svg
                                             viewBox="0 0 120 50"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="w-full h-full stroke-[#814E7A]"
+                                            className="w-full h-full stroke-[#7D4E7A]"
                                             fill="none"
                                             strokeWidth="2"
                                         >
@@ -107,7 +107,7 @@ const HowItWorks = () => {
                                             />
                                             <polygon
                                                 points="115,20 120,25 115,30"
-                                                fill="#814E7A"
+                                                fill="#7D4E7A"
                                             />
                                         </svg>
                                     </div>
@@ -126,7 +126,7 @@ const HowItWorks = () => {
                             : "translate-y-4 opacity-0"
                     }`}
                 >
-                    <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block hover:border-[#814E7A] transition-colors duration-300">
+                    <div className="border-solid border-[#4A6FA5] border-2 rounded-full p-0.5 md:p-1 inline-block hover:border-[#7D4E7A] transition-colors duration-300">
                         <button
                             onClick={() => {
                                 const section =
@@ -137,7 +137,7 @@ const HowItWorks = () => {
                                     });
                                 }
                             }}
-                            className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase"
+                            className="bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] hover:from-[#3A5A8C] hover:to-[#6D3E69] cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase shadow-lg"
                         >
                             Schedule Discovery Call
                         </button>

@@ -24,39 +24,63 @@ export const parseWindowDays = (windowName) => {
 export const getWindowDateRange = (windowName) => {
   const now = new Date();
   const currentDay = now.getDay();
+  const currentDate = now.getDate();
+  const currentMonth = now.getMonth();
   
   const availableDays = parseWindowDays(windowName);
   if (availableDays.length === 0) return null;
   
-  const maxDayInWindow = Math.max(...availableDays);
-  const minDayInWindow = Math.min(...availableDays);
-  
-  const needNextWeek = currentDay > maxDayInWindow;
+  const isSatSunWindow = windowName.toLowerCase().includes('sat-sun');
   
   let startDate = new Date(now);
   let endDate = new Date(now);
+  let isCurrentlyActive = false;
   
-  if (needNextWeek) {
-    const daysToNextWeekStart = 7 - currentDay + minDayInWindow;
-    const daysToNextWeekEnd = 7 - currentDay + maxDayInWindow;
-    startDate.setDate(now.getDate() + daysToNextWeekStart);
-    endDate.setDate(now.getDate() + daysToNextWeekEnd);
+  // Calculate start and end dates
+  if (isSatSunWindow) {
+    // Sat-Sun window logic (same as before)
+    if (currentDay === 6) {
+      startDate.setDate(currentDate);
+      endDate.setDate(currentDate + 1);
+      isCurrentlyActive = true;
+    } else if (currentDay === 0) {
+      startDate.setDate(currentDate - 1);
+      endDate.setDate(currentDate);
+      isCurrentlyActive = true;
+    } else {
+      const daysToSaturday = 6 - currentDay;
+      startDate.setDate(currentDate + daysToSaturday);
+      endDate.setDate(currentDate + daysToSaturday + 1);
+      isCurrentlyActive = false;
+    }
   } else {
-    const daysToWindowStart = minDayInWindow - currentDay;
-    const daysToWindowEnd = maxDayInWindow - currentDay;
-    startDate.setDate(now.getDate() + daysToWindowStart);
-    endDate.setDate(now.getDate() + daysToWindowEnd);
+    // For Mon-Wed, Thu-Fri windows
+    const minDay = Math.min(...availableDays);
+    const maxDay = Math.max(...availableDays);
+    
+    let daysToStart = minDay - currentDay;
+    if (daysToStart <= 0) daysToStart += 7; // Move to next week
+    
+    const daysToEnd = maxDay - currentDay;
+    
+    startDate.setDate(currentDate + daysToStart);
+    endDate.setDate(currentDate + (daysToEnd <= 0 ? daysToEnd + 7 : daysToEnd));
+    isCurrentlyActive = (currentDay >= minDay && currentDay <= maxDay);
   }
   
-  // Reset time to beginning of the day
+  // Reset time
   startDate.setHours(0, 0, 0, 0);
   endDate.setHours(23, 59, 59, 999);
+  
+  // Better next week detection
+  const weekDifference = Math.floor((startDate - now) / (7 * 24 * 60 * 60 * 1000));
+  const isNextWeek = weekDifference >= 1 || startDate.getMonth() !== currentMonth;
   
   return {
     startDate,
     endDate,
-    isNextWeek: needNextWeek,
-    isCurrentlyActive: availableDays.includes(currentDay) && !needNextWeek
+    isNextWeek,
+    isCurrentlyActive
   };
 };
 

@@ -28,6 +28,7 @@ const BookingModal = ({
   const [isLoadingWindows, setIsLoadingWindows] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(null);
+  const [isUrgent, setIsUrgent] = useState(false); // Urgent state
   
   const { isProcessing, processPayment } = usePayment();
 
@@ -97,16 +98,21 @@ const BookingModal = ({
       return;
     }
 
+    // Add "Urgent" to service title if urgent is selected
+    const serviceType = isUrgent 
+      ? `${selectedService.title} Urgent` 
+      : selectedService.title;
+
     // Prepare appointment data with dates
     const appointmentData = {
       name: formData.name,
       email: formData.email,
       phone: formData.phoneNumber,
-      serviceType: selectedService.title,
+      serviceType: serviceType,
       selectedWindow: selectedWindow,
       selectedWindowDates: selectedWindowDates,
       duration: parseInt(selectedDuration),
-      price: getPrice(selectedService, selectedDuration),
+      price: getPrice(selectedService, selectedDuration, isUrgent),
       location: formData.location
     };
 
@@ -124,8 +130,8 @@ const BookingModal = ({
           {/* Fixed Header */}
           <div className="flex justify-between items-center p-5 border-b border-gray-100">
             <div>
-              <h3 className="text-xl font-serif text-gray-800">Book {selectedService.title}</h3>
-              <p className="text-sm text-gray-500 mt-1">Fill in your details to proceed</p>
+              <h3 className="text-xl font-serif text-[#4A6FA5]">Book {selectedService.title}</h3>
+              <p className="text-sm text-[#66626A] mt-1">Fill in your details to proceed</p>
             </div>
           </div>
 
@@ -147,6 +153,8 @@ const BookingModal = ({
                 selectedWindowDates={selectedWindowDates}
                 appointmentWindows={appointmentWindows}
                 isLoadingWindows={isLoadingWindows}
+                isUrgent={isUrgent}
+                setIsUrgent={setIsUrgent}
                 handleDurationSelect={handleDurationSelect}
                 handleWindowSelect={handleWindowSelect}
                 getPrice={getPrice}
@@ -187,32 +195,32 @@ const PersonalInfoSection = ({
   handleCountryCodeChange
 }) => (
   <div className="space-y-3">
-    <h4 className="text-sm font-serif text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-1.5">
+    <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
       Personal Information
     </h4>
     
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+        <label className="block text-sm font-medium text-[#66626A] mb-1">Name *</label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B2655] focus:border-transparent transition-all cursor-text text-sm"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
           placeholder="Enter your name"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+        <label className="block text-sm font-medium text-[#66626A] mb-1">Email *</label>
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B2655] focus:border-transparent transition-all cursor-text text-sm"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
           placeholder="Enter your email"
         />
       </div>
@@ -234,10 +242,10 @@ const PersonalInfoSection = ({
 
 const PhoneInput = ({ formData, selectedCountryCode, countryCodes, handleInputChange, handleCountryCodeChange }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">
+    <label className="block text-sm font-medium text-[#66626A] mb-1">
       Phone Number *
     </label>
-    <div className="flex items-stretch rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-[#5B2655] focus-within:border-transparent overflow-hidden transition-all">
+    <div className="flex items-stretch rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-[#4A6FA5] focus-within:border-transparent overflow-hidden transition-all">
       <div className="relative flex-shrink-0">
         <select
           value={selectedCountryCode}
@@ -272,7 +280,7 @@ const PhoneInput = ({ formData, selectedCountryCode, countryCodes, handleInputCh
 
 const LocationInput = ({ formData, handleInputChange }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">
+    <label className="block text-sm font-medium text-[#66626A] mb-1">
       Location *
       <span className="text-xs text-gray-400 ml-2 font-normal">(Auto-filled)</span>
     </label>
@@ -283,7 +291,7 @@ const LocationInput = ({ formData, handleInputChange }) => (
       onChange={handleInputChange}
       required
       readOnly
-      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5B2655] focus:border-transparent bg-gray-50 cursor-text text-sm"
+      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent bg-gray-50 cursor-text text-sm"
       placeholder="Location will be auto-filled"
     />
   </div>
@@ -296,12 +304,14 @@ const ServiceConfigurationSection = ({
   selectedWindowDates,
   appointmentWindows,
   isLoadingWindows,
+  isUrgent,
+  setIsUrgent,
   handleDurationSelect,
   handleWindowSelect,
   getPrice
 }) => (
   <div className="space-y-3 mt-4">
-    <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide border-b border-gray-200 pb-1.5">
+    <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
       Service Configuration
     </h4>
     
@@ -312,12 +322,16 @@ const ServiceConfigurationSection = ({
     />
 
     {selectedDuration && (
-      <WindowSelection 
-        selectedWindow={selectedWindow}
-        appointmentWindows={appointmentWindows}
-        isLoadingWindows={isLoadingWindows}
-        handleWindowSelect={handleWindowSelect}
-      />
+      <>
+        <UrgencySelection isUrgent={isUrgent} setIsUrgent={setIsUrgent} />
+        
+        <WindowSelection 
+          selectedWindow={selectedWindow}
+          appointmentWindows={appointmentWindows}
+          isLoadingWindows={isLoadingWindows}
+          handleWindowSelect={handleWindowSelect}
+        />
+      </>
     )}
 
     {selectedWindow && selectedWindowDates && (
@@ -326,6 +340,7 @@ const ServiceConfigurationSection = ({
         selectedWindow={selectedWindow}
         selectedWindowDates={selectedWindowDates}
         selectedService={selectedService}
+        isUrgent={isUrgent}
         getPrice={getPrice}
       />
     )}
@@ -334,7 +349,7 @@ const ServiceConfigurationSection = ({
 
 const DurationSelection = ({ selectedService, selectedDuration, handleDurationSelect }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">Duration *</label>
+    <label className="block text-sm font-medium text-[#66626A] mb-2">Duration *</label>
     <div className="grid grid-cols-2 gap-2">
       {selectedService.durations.map((duration) => (
         <button
@@ -343,8 +358,8 @@ const DurationSelection = ({ selectedService, selectedDuration, handleDurationSe
           onClick={() => handleDurationSelect(duration.time)}
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer border-2 ${
             selectedDuration === duration.time
-              ? 'bg-[#5B2655] text-white border-[#5B2655] shadow-md transform scale-105'
-              : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200 hover:border-[#5B2655]'
+              ? 'bg-[#4A6FA5] text-white border-[#4A6FA5] shadow-md transform scale-105'
+              : 'bg-white text-[#66626A] hover:bg-gray-50 border-gray-200 hover:border-[#4A6FA5]'
           }`}
         >
           {duration.time} minutes
@@ -354,14 +369,50 @@ const DurationSelection = ({ selectedService, selectedDuration, handleDurationSe
   </div>
 );
 
+const UrgencySelection = ({ isUrgent, setIsUrgent }) => (
+  <div>
+    <label className="block text-sm font-medium text-[#66626A] mb-2">Service Type *</label>
+    <div className="flex items-center justify-between bg-gray-50 p-3 rounded-lg border border-gray-200">
+      <div className="flex items-center gap-2">
+        <span className="text-sm text-[#66626A]">Normal</span>
+      </div>
+      
+      <button
+        type="button"
+        onClick={() => setIsUrgent(!isUrgent)}
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:ring-offset-2 cursor-pointer ${
+          isUrgent ? 'bg-orange-500' : 'bg-gray-300'
+        }`}
+      >
+        <span
+          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
+            isUrgent ? 'translate-x-6' : 'translate-x-1'
+          }`}
+        />
+      </button>
+      
+      <div className="flex items-center gap-2">
+        <span className={`text-sm font-medium ${isUrgent ? 'text-orange-500' : 'text-[#66626A]'}`}>
+          🚨 Urgent
+        </span>
+      </div>
+    </div>
+    {isUrgent && (
+      <p className="text-xs text-orange-600 mt-1.5 ml-1">
+        ⚡ Priority booking with higher pricing
+      </p>
+    )}
+  </div>
+);
+
 const WindowSelection = ({ selectedWindow, appointmentWindows, isLoadingWindows, handleWindowSelect }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">Appointment Window *</label>
+    <label className="block text-sm font-medium text-[#66626A] mb-2">Appointment Window *</label>
     
     {isLoadingWindows ? (
       <div className="text-center py-3">
-        <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-[#5B2655]"></div>
-        <p className="text-sm text-gray-500 mt-1">Loading available time slots...</p>
+        <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-[#4A6FA5]"></div>
+        <p className="text-sm text-[#66626A] mt-1">Loading available time slots...</p>
       </div>
     ) : appointmentWindows.length > 0 ? (
       <div className="grid grid-cols-1 gap-2">
@@ -385,7 +436,7 @@ const WindowSelection = ({ selectedWindow, appointmentWindows, isLoadingWindows,
       </div>
     ) : (
       <div className="text-center py-3 bg-gray-50 rounded-lg">
-        <p className="text-sm text-gray-500">No appointment windows available at the moment.</p>
+        <p className="text-sm text-[#66626A]">No appointment windows available at the moment.</p>
         <p className="text-xs text-gray-400 mt-0.5">Please try again later or contact support.</p>
       </div>
     )}
@@ -398,8 +449,8 @@ const WindowOption = ({ window, windowInfo, isCurrentlyAvailable, isSelected, on
     onClick={() => onSelect(window.windowName)}
     className={`px-3 py-2 rounded-lg text-left transition-all duration-200 cursor-pointer border-2 ${
       isSelected
-        ? 'bg-[#5B2655] text-white border-[#5B2655] shadow-md transform scale-105'
-        : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200 hover:border-[#5B2655]'
+        ? 'bg-[#4A6FA5] text-white border-[#4A6FA5] shadow-md transform scale-105'
+        : 'bg-white text-[#66626A] hover:bg-gray-50 border-gray-200 hover:border-[#4A6FA5]'
     }`}
   >
     <div className="flex justify-between items-center">
@@ -439,16 +490,20 @@ const WindowOption = ({ window, windowInfo, isCurrentlyAvailable, isSelected, on
   </button>
 );
 
-const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, getPrice }) => (
-  <div className="bg-gradient-to-r from-[#5B2655]/5 to-[#814E7A]/5 border border-[#5B2655]/20 p-3 rounded-lg">
+const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, isUrgent, getPrice }) => (
+  <div className="bg-gradient-to-r from-[#4A6FA5]/5 to-[#7D4E7A]/5 border border-[#4A6FA5]/20 p-3 rounded-lg">
     <div className="flex justify-between items-center">
       <div>
-        <span className="text-sm text-gray-600">Session Duration:</span>
-        <p className="font-medium text-gray-800 text-sm">{selectedDuration} minutes</p>
-        <span className="text-sm text-gray-600 mt-0.5 block">Appointment Window:</span>
-        <p className="font-medium text-gray-800 text-sm">{selectedWindow}</p>
-        <span className="text-sm text-gray-600 mt-0.5 block">Available Period:</span>
-        <p className="font-medium text-[#5B2655] text-sm">
+        <span className="text-sm text-[#66626A]">Session Duration:</span>
+        <p className="font-medium text-[#4A6FA5] text-sm">{selectedDuration} minutes</p>
+        <span className="text-sm text-[#66626A] mt-0.5 block">Service Type:</span>
+        <p className="font-medium text-[#4A6FA5] text-sm">
+          {isUrgent ? '🚨 Urgent' : 'Normal'}
+        </p>
+        <span className="text-sm text-[#66626A] mt-0.5 block">Appointment Window:</span>
+        <p className="font-medium text-[#4A6FA5] text-sm">{selectedWindow}</p>
+        <span className="text-sm text-[#66626A] mt-0.5 block">Available Period:</span>
+        <p className="font-medium text-[#7D4E7A] text-sm">
           {selectedWindowDates.displayDate}
         </p>
         <span className="text-xs text-gray-500 mt-0.5 block">
@@ -464,10 +519,15 @@ const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, s
         </span>
       </div>
       <div className="text-right">
-        <span className="text-sm text-gray-600">Total Price:</span>
-        <p className="text-xl font-bold text-[#5B2655]">
-          ₹{getPrice(selectedService, selectedDuration)}
+        <span className="text-sm text-[#66626A]">Total Price:</span>
+        <p className="text-xl font-bold text-[#4A6FA5]">
+          ₹{getPrice(selectedService, selectedDuration, isUrgent)}
         </p>
+        {isUrgent && (
+          <span className="text-xs text-orange-600 mt-0.5 block">
+            Urgent pricing
+          </span>
+        )}
       </div>
     </div>
   </div>
@@ -479,14 +539,14 @@ const Footer = ({ closeModal, isFormValid, isProcessing, handleSubmit }) => (
       <button
         type="button"
         onClick={closeModal}
-        className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer font-medium text-sm"
+        className="flex-1 px-4 py-2.5 border border-gray-300 text-[#66626A] rounded-lg hover:bg-gray-50 transition-colors cursor-pointer font-medium text-sm"
       >
         Cancel
       </button>
       <button
         type="submit"
         disabled={!isFormValid || isProcessing}
-        className="flex-1 bg-gradient-to-r from-[#5B2655] to-[#814E7A] text-white px-4 py-2.5 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer font-medium transition-all shadow-lg hover:shadow-xl flex items-center justify-center text-sm"
+        className="flex-1 bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] text-white px-4 py-2.5 rounded-lg hover:from-[#3A5A8C] hover:to-[#6D3E69] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer font-medium transition-all shadow-lg hover:shadow-xl flex items-center justify-center text-sm"
         onClick={handleSubmit}
       >
         {isProcessing ? (

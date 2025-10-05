@@ -36,7 +36,7 @@ const FAQ = () => {
         <Container>
             <div
                 id="faq"
-                className="bg-gradient-to-b pt-8 px-4 from-[#F5F3EF] to-[#E1D9CB] rounded-4xl"
+                className="bg-gradient-to-b pt-8 px-4 from-[#F0EDF0] to-[#F8F6F7] rounded-4xl"
             >
                 {/* FAQ Header */}
                 <div
@@ -48,14 +48,14 @@ const FAQ = () => {
                     }`}
                 >
                     <div className="mb-4">
-                        <span className="bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-gray-300 transition-colors duration-300 cursor-default">
+                        <span className="bg-white text-[#66626A] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-[#E8C5D7] hover:text-[#4A6FA5] transition-colors duration-300 cursor-default">
                             FAQ
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-[#4A6FA5] mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         Questions Answered
                     </h2>
-                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-[#66626A] max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         If you don't see your question answered here, please get
                         in touch.
                     </p>
@@ -66,7 +66,7 @@ const FAQ = () => {
                     {faqItems.map((item, index) => (
                         <div
                             key={index}
-                            className={`border-b border-gray-200 last:border-b-0 transform transition-all duration-700 ease-in-out delay-${
+                            className={`border-b border-[#D4A5C3] last:border-b-0 transform transition-all duration-700 ease-in-out delay-${
                                 index * 100
                             } ${
                                 faqVisible
@@ -75,16 +75,16 @@ const FAQ = () => {
                             }`}
                         >
                             <button
-                                className="flex justify-between items-center w-full py-5 text-left hover:bg-white/30 rounded-lg px-4 transition-all duration-300 cursor-pointer group"
+                                className="flex justify-between items-center w-full py-5 text-left hover:bg-white/50 rounded-lg px-4 transition-all duration-300 cursor-pointer group"
                                 onClick={() => toggleFAQ(index)}
                                 aria-expanded={activeIndex === index}
                             >
-                                <span className="font-serif text-base md:text-xl font-medium  text-gray-800 pr-4 group-hover:text-[#5B2655] transition-colors duration-300">
+                                <span className="font-serif text-base md:text-xl font-medium text-[#4A6FA5] pr-4 group-hover:text-[#7D4E7A] transition-colors duration-300">
                                     {item.question}
                                 </span>
                                 <span className="flex-shrink-0 ml-2">
                                     <svg
-                                        className={`w-5 h-5 text-[#5B2655] transform transition-all duration-300 group-hover:scale-110 ${
+                                        className={`w-5 h-5 text-[#4A6FA5] transform transition-all duration-300 group-hover:scale-110 group-hover:text-[#7D4E7A] ${
                                             activeIndex === index
                                                 ? "rotate-180"
                                                 : "rotate-0"
@@ -109,7 +109,7 @@ const FAQ = () => {
                                         : "max-h-0 opacity-0"
                                 }`}
                             >
-                                <p className="text-sm md:text-xl font-light text-gray-600 leading-relaxed pl-4">
+                                <p className="text-sm md:text-xl font-light text-[#66626A] leading-relaxed pl-4 group-hover:text-[#4A6FA5] transition-colors duration-300">
                                     {item.answer}
                                 </p>
                             </div>

@@ -1,97 +1,122 @@
 [
     {
         "id": 1,
-        "title": "Tarot Card Reading Session",
+        "title": "Tarot Card Reading",
         "description": "Get clarity and guidance through tarot cards.",
         "image": "/services/tarot.jpeg",
-        "alt": "Tarot card reading session",
+        "alt": "Tarot card reading",
         "durations": [
             {
-                "time": 30,
-                "priceIndia": 2999,
-                "priceNri": 3999
+                "time": 15,
+                "priceIndia": 1800,
+                "priceNri": 2300,
+                "urgentPriceIndia": 2800,
+                "urgentPriceNri": 3300
             },
             {
-                "time": 45,
-                "priceIndia": 4299,
-                "priceNri": 5799
+                "time": 30,
+                "priceIndia": 3499,
+                "priceNri": 4500,
+                "urgentPriceIndia": 4499,
+                "urgentPriceNri": 5500
             },
             {
                 "time": 60,
-                "priceIndia": 5899,
-                "priceNri": 7899
+                "priceIndia": 5999,
+                "priceNri": 7999,
+                "urgentPriceIndia": 6999,
+                "urgentPriceNri": 8999
             }
         ]
     },
     {
         "id": 2,
         "title": "Akashic Record Reading",
-        "description": "Deep soul-level insights (6 sessions required).",
+        "description": "Deep soul-level insights (6 sessions required, pre-booking only).",
         "image": "/services/akashic.jpeg",
         "alt": "Akashic record reading",
         "durations": [
             {
-                "time": 30,
-                "priceIndia": 2599,
-                "priceNri": 2599
+                "time": 15,
+                "priceIndia": 1500,
+                "priceNri": 2000,
+                "urgentPriceIndia": 2500,
+                "urgentPriceNri": 3000
             },
             {
-                "time": 45,
-                "priceIndia": 3299,
-                "priceNri": 3299
+                "time": 30,
+                "priceIndia": 2999,
+                "priceNri": 3999,
+                "urgentPriceIndia": 3999,
+                "urgentPriceNri": 4999
             },
             {
                 "time": 60,
-                "priceIndia": 4199,
-                "priceNri": 4199
+                "priceIndia": 5999,
+                "priceNri": 7999,
+                "urgentPriceIndia": 6999,
+                "urgentPriceNri": 8999
             }
-        ]
+        ],
+        "sessionsRequired": 6
     },
     {
         "id": 3,
         "title": "Numerology Correction",
-        "description": "Name, house number & mobile number correction.",
+        "description": "Name and phone number correction.",
         "image": "/services/numerology.jpeg",
         "alt": "Numerology correction",
         "durations": [
             {
-                "time": 30,
-                "priceIndia": 4999,
-                "priceNri": 4999
+                "time": 15,
+                "priceIndia": 1500,
+                "priceNri": 2000,
+                "urgentPriceIndia": 2500,
+                "urgentPriceNri": 3000
             },
             {
-                "time": 45,
-                "priceIndia": 4999,
-                "priceNri": 4999
+                "time": 30,
+                "priceIndia": 2999,
+                "priceNri": 3999,
+                "urgentPriceIndia": 3999,
+                "urgentPriceNri": 4999
             },
             {
                 "time": 60,
-                "priceIndia": 4999,
-                "priceNri": 4999
+                "priceIndia": 5999,
+                "priceNri": 7999,
+                "urgentPriceIndia": 6999,
+                "urgentPriceNri": 8999
             }
         ]
     },
     {
         "id": 4,
         "title": "Single Question Reading",
-        "description": "Get an answer for a single burning question.",
+        "description": "Get an answer for a single burning question. Keep your question specific.",
         "image": "/services/single.jpeg",
         "alt": "Single tarot question",
         "durations": [
             {
-                "time": 30,
+                "time": 15,
                 "priceIndia": 1199,
-                "priceNri": 1199
+                "priceNri": 1599,
+                "urgentPriceIndia": 1599,
+                "urgentPriceNri": 1999
             },
             {
-                "time": 45,
+                "time": 30,
                 "priceIndia": 1199,
-                "priceNri": 1199
+                "priceNri": 1599,
+                "urgentPriceIndia": 1599,
+                "urgentPriceNri": 1999
             },
             {
                 "time": 60,
                 "priceIndia": 1199,
-                "priceNri": 1199
+                "priceNri": 1599,
+                "urgentPriceIndia": 1599,
+                "urgentPriceNri": 1999
             }
         ]
     }

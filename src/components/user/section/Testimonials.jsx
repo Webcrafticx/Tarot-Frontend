@@ -63,7 +63,7 @@ const Testimonials = () => {
         Array.from({ length: rating }, (_, index) => (
             <Star
                 key={index}
-                className="w-4 h-4 md:w-5 md:h-5 fill-[#5B2655] text-[#5B2655] transition-transform duration-300 hover:scale-110"
+                className="w-4 h-4 md:w-5 md:h-5 fill-[#4A6FA5] text-[#4A6FA5] transition-transform duration-300 hover:scale-110"
             />
         ));
 
@@ -85,14 +85,14 @@ const Testimonials = () => {
                     }`}
                 >
                     <div className="mb-4">
-                        <span className="bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-gray-300 transition-colors duration-300 cursor-default">
+                        <span className="bg-white text-[#66626A] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:bg-[#E8C5D7] hover:text-[#4A6FA5] transition-colors duration-300 cursor-default">
                             Testimonials
                         </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-gray-800 mb-4 transform transition-all duration-700 ease-in-out delay-100">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif text-[#4A6FA5] mb-4 transform transition-all duration-700 ease-in-out delay-100">
                         What Clients Say
                     </h2>
-                    <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
+                    <p className="text-sm md:text-lg text-[#66626A] max-w-2xl mx-auto transform transition-all duration-700 ease-in-out delay-200">
                         Real experiences from people who found their path to
                         healing.
                     </p>
@@ -127,27 +127,27 @@ const Testimonials = () => {
                                     }}
                                 >
                                     <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full relative overflow-hidden group">
-                                        <Quote className="absolute -top-4 -left-4 w-20 h-20 text-[#F8F5F8] opacity-60 z-0 transition-all duration-500 group-hover:scale-110" />
+                                        <Quote className="absolute -top-4 -left-4 w-20 h-20 text-[#F0EDF0] opacity-60 z-0 transition-all duration-500 group-hover:scale-110" />
                                         <div className="relative z-10">
                                             <div className="flex items-center gap-1 mb-4">
                                                 {renderStars(
                                                     testimonial.rating
                                                 )}
                                             </div>
-                                            <blockquote className="text-sm md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6 transition-all duration-500 group-hover:text-gray-900">
+                                            <blockquote className="text-sm md:text-base text-[#66626A] leading-relaxed mb-4 md:mb-6 transition-all duration-500 group-hover:text-[#4A6FA5]">
                                                 "{testimonial.text}"
                                             </blockquote>
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <p className="font-serif text-gray-800 text-sm md:text-lg transition-colors duration-300 group-hover:text-[#5B2655]">
+                                                    <p className="font-serif text-[#4A6FA5] text-sm md:text-lg transition-colors duration-300 group-hover:text-[#7D4E7A]">
                                                         {testimonial.name}
                                                     </p>
-                                                    <p className="text-xs md:text-sm text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
+                                                    <p className="text-xs md:text-sm text-[#66626A] transition-colors duration-300 group-hover:text-[#4A6FA5]">
                                                         {testimonial.age} years
                                                         old
                                                     </p>
                                                 </div>
-                                                <div className="w-8 h-8 bg-gradient-to-r from-[#5B2655] to-[#814E7A] rounded-full opacity-10 transition-all duration-300 group-hover:opacity-20 group-hover:scale-110"></div>
+                                                <div className="w-8 h-8 bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] rounded-full opacity-10 transition-all duration-300 group-hover:opacity-20 group-hover:scale-110"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -159,17 +159,17 @@ const Testimonials = () => {
                     {/* Navigation Arrows */}
                     <button
                         onClick={prevSlide}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-[#E8C5D7] transition-all duration-300 hover:scale-110 hover:shadow-xl"
                         aria-label="Previous testimonial"
                     >
-                        <ChevronLeft className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300 cursor-pointer" />
+                        <ChevronLeft className="w-5 h-5 text-[#66626A] hover:text-[#4A6FA5] transition-colors duration-300 cursor-pointer" />
                     </button>
                     <button
                         onClick={nextSlide}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 hover:scale-110 hover:shadow-xl"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg flex items-center justify-center hover:bg-[#E8C5D7] transition-all duration-300 hover:scale-110 hover:shadow-xl"
                         aria-label="Next testimonial"
                     >
-                        <ChevronRight className="w-5 h-5 text-gray-600 hover:text-[#5B2655] transition-colors duration-300 cursor-pointer" />
+                        <ChevronRight className="w-5 h-5 text-[#66626A] hover:text-[#4A6FA5] transition-colors duration-300 cursor-pointer" />
                     </button>
                 </div>
 
@@ -188,8 +188,8 @@ const Testimonials = () => {
                             onClick={() => goToSlide(index)}
                             className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 cursor-pointer ${
                                 currentIndex === index * testimonialsPerPage
-                                    ? "bg-[#5B2655] scale-125"
-                                    : "bg-gray-200 hover:bg-gray-400"
+                                    ? "bg-[#4A6FA5] scale-125"
+                                    : "bg-gray-200 hover:bg-[#D4A5C3]"
                             }`}
                             aria-label={`Go to slide ${index + 1}`}
                         />
@@ -205,8 +205,8 @@ const Testimonials = () => {
                             : "translate-y-6 opacity-0"
                     }`}
                 >
-                    <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block transition-all duration-300 hover:border-[#814E7A] hover:scale-105">
-                        <button className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:from-[#814E7A] hover:to-[#5B2655] cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 hover:shadow-lg uppercase">
+                    <div className="border-solid border-[#4A6FA5] border-2 rounded-full p-0.5 md:p-1 inline-block transition-all duration-300 hover:border-[#7D4E7A] hover:scale-105">
+                        <button className="bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] hover:from-[#3A5A8C] hover:to-[#6D3E69] cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 hover:shadow-lg uppercase">
                             Share Your Experience
                         </button>
                     </div>
