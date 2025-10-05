@@ -17,7 +17,7 @@ const About = () => {
                 id="about"
                 className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8"
             >
-                <div className="relative grid grid-cols-1 md:grid-cols-3 items-center bg-[#1B0F1E] rounded-3xl shadow-lg overflow-hidden md:overflow-visible">
+                <div className="relative grid grid-cols-1 md:grid-cols-3 items-center bg-gradient-to-br from-[#4A6FA5] via-[#7D4E7A] to-[#D4A5C3] rounded-3xl shadow-lg overflow-hidden md:overflow-visible">
                     {/* Left - Content */}
                     <div className="text-center md:col-span-2 md:text-left text-white p-6 md:pl-20 md:pr-8 lg:pr-16 space-y-4 md:space-y-6 order-2 relative z-10">
                         {/* Badge */}
@@ -29,7 +29,7 @@ const About = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <span className="border border-[#A1A1A1] text-[#A1A1A1] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:border-[#C2B6C1] hover:text-[#C2B6C1] transition-colors duration-800 cursor-default">
+                            <span className="border border-[#E8C5D7] text-[#E8C5D7] px-4 py-1.5 rounded-full text-xs md:text-sm font-medium uppercase tracking-wide hover:border-white hover:text-white transition-colors duration-300 cursor-default">
                                 About Your Therapist
                             </span>
                         </div>
@@ -37,25 +37,25 @@ const About = () => {
                         {/* Heading */}
                         <h2
                             ref={headingRef}
-                            className={`font-serif text-2xl md:text-2xl xl:text-5xl leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
+                            className={`font-serif text-2xl md:text-2xl xl:text-4xl leading-tight transform transition-all duration-700 ease-in-out delay-100 ${
                                 headingVisible
                                     ? "translate-y-0 opacity-100"
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            I'm Here To Serve You
+                            I'm Here To Support Your Journey
                         </h2>
 
                         {/* Description */}
                         <p
                             ref={descRef}
-                            className={`text-sm md:text-sm xl:text-xl text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
+                            className={`text-sm md:text-sm xl:text-xl text-gray-100 leading-relaxed max-w-xl mx-auto lg:mx-0 transform transition-all duration-700 ease-in-out delay-200 ${
                                 descVisible
                                     ? "translate-y-0 opacity-100"
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            "Hi, I’m Raveena  — a Tarot card reader, Numerologist, and Akashic Record reader. I guide you to clarity, healing, and alignment by helping release blockages and connect more deeply with your true path"
+                            "Hi, I'm Raveena — a Tarot card reader, Numerologist, and Akashic Record reader. I guide you to clarity, healing, and alignment by helping release blockages and connect more deeply with your true path"
                         </p>
 
                         {/* Achievements */}
@@ -67,13 +67,13 @@ const About = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
-                                <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
+                            <div className="flex items-center gap-2 text-[#E8C5D7] group hover:text-white transition-colors duration-300 cursor-default">
+                                <SlBadge className="text-[#E8C5D7] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
                                 <span className="text-lg">Spells and Remedies Expert</span>
                             </div>
 
-                            <div className="flex items-center gap-2 text-[#C2B6C1] group hover:text-white transition-colors duration-300 cursor-default">
-                                <SlBadge className="text-[#C2B6C1] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
+                            <div className="flex items-center gap-2 text-[#E8C5D7] group hover:text-white transition-colors duration-300 cursor-default">
+                                <SlBadge className="text-[#E8C5D7] w-4 h-4 lg:w-5 lg:h-5 group-hover:scale-110 transition-transform duration-300" />
                                 <span className="text-lg">Guided over 24k souls globally</span>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const About = () => {
                                     : "translate-y-4 opacity-0"
                             }`}
                         >
-                            <div className="border-solid border-[#C2B6C1] border-2 rounded-full p-0.5 md:p-1 inline-block hover:border-white transition-colors duration-300">
+                            <div className="border-solid border-white border-2 rounded-full p-0.5 md:p-1 inline-block hover:border-[#E8C5D7] transition-colors duration-300">
                                 <button
                                     onClick={() => {
                                         const section =
@@ -98,7 +98,7 @@ const About = () => {
                                             });
                                         }
                                     }}
-                                    className="bg-gradient-to-r from-[#5B2655] to-[#814E7A] hover:opacity-90 cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase"
+                                    className="bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] hover:from-[#3A5A8C] hover:to-[#6D3E69] cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 ease-in-out uppercase"
                                 >
                                     Book My Consultation
                                 </button>
@@ -117,7 +117,7 @@ const About = () => {
                     >
                         {/* Mobile & Tablet Image */}
                         <div className="md:hidden relative w-44 h-56 sm:w-48 sm:h-72 md:w-56 md:h-80 transform hover:scale-105 transition-transform duration-500 cursor-pointer">
-                            <div className="rounded-t-full overflow-hidden border-4 border-[#C2B6C1] w-full h-full hover:border-white transition-colors duration-300">
+                            <div className="rounded-t-full overflow-hidden border-4 border-[#E8C5D7] w-full h-full hover:border-white transition-colors duration-300 shadow-xl">
                                 <img
                                     src="/user/about.jpg"
                                     alt="Therapist Portrait"
@@ -128,7 +128,7 @@ const About = () => {
 
                         {/* Desktop Image */}
                         <div className="hidden md:block absolute md:-top-40 md:-right-14 lg:-top-54 lg:-right-6 md:h-[358px] lg:h-[440px] xl:right-10 xl:-top-64 w-58 lg:w-72 xl:w-96 xl:h-[520px] order-1 hover:-translate-y-2 transition-transform duration-500 cursor-pointer">
-                            <div className="rounded-t-full overflow-hidden border-4 border-[#824E1A] w-full h-full shadow-2xl p-2 hover:border-[#A56B2C] transition-colors duration-300">
+                            <div className="rounded-t-full overflow-hidden border-4 border-white w-full h-full shadow-2xl p-2 hover:border-[#E8C5D7] transition-colors duration-300">
                                 <div className="rounded-t-full overflow-hidden w-full h-full shadow-2xl">
                                     <img
                                         src="/user/about.jpg"

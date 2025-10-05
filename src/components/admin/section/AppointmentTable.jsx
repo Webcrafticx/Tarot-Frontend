@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { 
   ChevronUp, ChevronDown, Calendar, MessageCircle, 
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, AlertTriangle,
   Search, Phone, Clock, MapPin
 } from "lucide-react";
 
@@ -25,6 +25,28 @@ const AppointmentTable = ({
     setItemsPerPage(newLimit);
     setCurrentPage(1);
     fetchAppointments(1, newLimit);
+  };
+
+  // Check if service is urgent
+  const isUrgentService = (serviceType) => {
+    return serviceType && serviceType.toLowerCase().includes('urgent');
+  };
+
+  // Get urgent service styling
+  const getUrgentServiceStyle = (serviceType, isMobile = false) => {
+    if (!isUrgentService(serviceType)) return {};
+    
+    if (isMobile) {
+      return {
+        borderLeft: '4px solid #ef4444',
+        backgroundColor: '#fef2f2'
+      };
+    }
+    
+    return {
+      backgroundColor: '#fef2f2',
+      borderLeft: '3px solid #ef4444'
+    };
   };
 
   // Format duration to show minutes
@@ -172,6 +194,16 @@ const AppointmentTable = ({
     return (
       <span className={`text-xs px-2 py-1 ${colorClass} rounded-full whitespace-nowrap cursor-default capitalize`}>
         {status || 'N/A'}
+      </span>
+    );
+  };
+
+  // Urgent service badge
+  const renderUrgentBadge = () => {
+    return (
+      <span className="flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs border border-red-200">
+        <AlertTriangle className="w-3 h-3" />
+        Urgent
       </span>
     );
   };
@@ -366,17 +398,30 @@ const AppointmentTable = ({
                 </tr>
               ) : (
                 currentAppointments.map((appointment) => (
-                  <tr key={appointment._id} className="hover:bg-gray-50 cursor-default">
+                  <tr 
+                    key={appointment._id} 
+                    className="hover:bg-gray-50 cursor-default transition-colors"
+                    style={getUrgentServiceStyle(appointment.serviceType)}
+                  >
                     <td className="py-4 px-2 sm:px-4">
-                      <div>
-                        <div className="font-medium text-gray-900 cursor-default">{appointment.name || 'N/A'}</div>
-                        <div className="text-xs text-gray-500 truncate max-w-[120px] sm:max-w-none cursor-default">{appointment.email || 'N/A'}</div>
+                      <div className="flex items-start gap-2">
+                        <div>
+                          <div className="font-medium text-gray-900 cursor-default flex items-center gap-2">
+                            {appointment.name || 'N/A'}
+                            {isUrgentService(appointment.serviceType) && renderUrgentBadge()}
+                          </div>
+                          <div className="text-xs text-gray-500 truncate max-w-[120px] sm:max-w-none cursor-default">{appointment.email || 'N/A'}</div>
+                        </div>
                       </div>
                     </td>
                     <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       {appointment.phone || 'N/A'}
                     </td>
-                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap capitalize cursor-default">{appointment.serviceType || 'N/A'}</td>
+                    <td className="py-4 px-2 sm:px-4 whitespace-nowrap capitalize cursor-default">
+                      <div className="flex items-center gap-2">
+                        {appointment.serviceType || 'N/A'}
+                      </div>
+                    </td>
                     <td className="py-4 px-2 sm:px-4 whitespace-nowrap cursor-default">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
@@ -458,13 +503,20 @@ const AppointmentTable = ({
           </div>
         ) : (
           currentAppointments.map((appointment) => (
-            <div key={appointment._id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+            <div 
+              key={appointment._id} 
+              className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 transition-colors"
+              style={getUrgentServiceStyle(appointment.serviceType, true)}
+            >
               <div 
                 className="flex justify-between items-start cursor-pointer"
                 onClick={() => toggleRowExpansion(appointment._id)}
               >
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900 text-sm cursor-pointer">{appointment.name || 'N/A'}</div>
+                  <div className="font-medium text-gray-900 text-sm cursor-pointer flex items-center gap-2">
+                    {appointment.name || 'N/A'}
+                    {isUrgentService(appointment.serviceType) && renderUrgentBadge()}
+                  </div>
                   <div className="text-xs text-gray-500 mt-1 capitalize cursor-pointer">{appointment.serviceType || 'N/A'}</div>
                 </div>
                 <ChevronDown 

@@ -39,13 +39,13 @@ export const usePayment = () => {
         throw new Error("Razorpay SDK failed to load");
       }
 
-      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID_TEST;
+      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
       const options = {
         key: razorpayKey,
         amount: amountInPaise,
         currency: "INR",
-        name: "Tarot Cat Reading",
+        name: "RaveenaTarotStarr",
         description: `Appointment for ${appointmentData.serviceType}`,
         image: "/logo.png",
         order_id: orderData.id,

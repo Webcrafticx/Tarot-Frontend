@@ -1,6 +1,34 @@
 {
   "testimonials": [
     {
+      "id": 9,
+      "name": "Jocelyne Stephens",
+      "age": "41",
+      "rating": 5,
+      "text": "Ravinas Francois gave me a reading today which was detailed and accurate, she picked up my energy straight away. Plus she delivered her messages in a very good manner. Thank you so much for my reading."
+    },
+    {
+      "id": 10,
+      "name": "Puja D",
+      "age": "36",
+      "rating": 4,
+      "text": "I took a reading from Ravina mam. It totally resonates and is up to the point. Thank you mam for your positive energy and time."
+    },
+    {
+      "id": 11,
+      "name": "Frame",
+      "age": "33",
+      "rating": 5,
+      "text": "Thanks for the live reading today. I feel your insights were really accurate and on point always. I am happy for your reading, you are really gifted!!! Thanks for your time and energy. Highly recommended!!"
+    },
+    {
+      "id": 12,
+      "name": "Anonymous Client",
+      "age": "29",
+      "rating": 4,
+      "text": "I had a donation reading from Ravinas Francis. The reading was spot on regarding my whole situation with my person, job, and family. She was very detailed and gave me the clarity and guidance that I needed. She's a very genuine, kind, amazing woman. Thank you so much for your time and energy."
+    },
+    {
       "id": 1,
       "name": "Sarah Johnson",
       "age": "34",
@@ -11,12 +39,12 @@
       "id": 2,
       "name": "Mark Williams",
       "age": "45",
-      "rating": 5,
+      "rating": 4,
       "text": "I reached out to Nadine during a period of uncertainty in my relationship. Her counselling helped me understand my feelings better and gave me the tools to communicate more openly with my partner. Our connection is now stronger, and I feel more secure in myself."
     },
     {
       "id": 3,
-      "name": "Jessica patel",
+      "name": "Jessica Patel",
       "age": "38",
       "rating": 5,
       "text": "After years of battling anxiety, I sought energy healing with Nadine. Each session helped me release deep-seated tension, and I noticed a significant reduction in my anxiety. Now, I approach stressful situations with a newfound sense of calm and clarity."
@@ -25,7 +53,7 @@
       "id": 4,
       "name": "Emily Thompson",
       "age": "29",
-      "rating": 5,
+      "rating": 4,
       "text": "Energy healing with Nadine has been life-changing—my stress and anxiety have significantly reduced."
     },
     {
@@ -33,17 +61,15 @@
       "name": "David Carter",
       "age": "42",
       "rating": 5,
-      "text": "“The counselling sessions helped me find clarity and peace in a time of great uncertainty.”"
+      "text": "The counselling sessions helped me find clarity and peace in a time of great uncertainty."
     },
-    
     {
       "id": 6,
       "name": "Michael Lee",
       "age": "51",
-      "rating": 5,
+      "rating": 4,
       "text": "The retreat was a transformative experience that deepened my spiritual connection and gave me the strength to move forward."
     },
-   
     {
       "id": 7,
       "name": "Chloe Davis",
@@ -55,9 +81,8 @@
       "id": 8,
       "name": "Ryan Martinez",
       "age": "39",
-      "rating": 5,
-      "text": "The retreat was a deeply healing and transformative experience. I left feeling rejuvenated and more connected to my spiritual self. The guidance I received helped me release emotional blockages and gain a clearer vision for my life’s path."
+      "rating": 4,
+      "text": "The retreat was a deeply healing and transformative experience. I left feeling rejuvenated and more connected to my spiritual self. The guidance I received helped me release emotional blockages and gain a clearer vision for my life's path."
     }
   ]
- 
 }
