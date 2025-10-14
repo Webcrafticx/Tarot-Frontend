@@ -39,7 +39,7 @@ export const usePayment = () => {
         throw new Error("Razorpay SDK failed to load");
       }
 
-      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID_TEST;
 
       const options = {
         key: razorpayKey,
