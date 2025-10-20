@@ -75,7 +75,7 @@ const CancellationRefund = () => {
             </p>
             <p className="font-semibold">
               Email: Raveenatarotstarr@gmail.com <br />
-              Phone: +91 9008408625
+              Phone: +91 8861534739
             </p>
           </div>
         </div>

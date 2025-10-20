@@ -5,7 +5,7 @@ const WhatsAppButton = () => {
   const [showTooltip, setShowTooltip] = useState(true);
 
   const openWhatsApp = () => {
-    const phoneNumber = "919008408625"; // Raveena Tarot Starr
+    const phoneNumber = "918861534739"; // Raveena Tarot Starr
     const message = "Hello Raveena, I would like to connect with you for guidance or to learn more about your services.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
