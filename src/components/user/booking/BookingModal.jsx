@@ -28,9 +28,12 @@ const BookingModal = ({
   const [isLoadingWindows, setIsLoadingWindows] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [appointmentDetails, setAppointmentDetails] = useState(null);
-  const [isUrgent, setIsUrgent] = useState(false); // Urgent state
+  const [isUrgent, setIsUrgent] = useState(false);
   
   const { isProcessing, processPayment } = usePayment();
+
+  // Check if it's single question service
+  const isSingleQuestionService = selectedService?.title?.toLowerCase().includes('single question');
 
   // Load appointment windows on component mount
   useEffect(() => {
@@ -57,12 +60,35 @@ const BookingModal = ({
     fetchAvailabilityWindows();
   }, []);
 
+  // Reset urgent state when service or duration changes
+  useEffect(() => {
+    setIsUrgent(false);
+  }, [selectedService, selectedDuration]);
+
   // Handle window selection
   const handleWindowSelect = (windowName) => {
     setSelectedWindow(windowName);
     const windowInfo = getWindowDateRange(windowName);
     if (windowInfo) {
       setSelectedWindowDates(formatDatesForPayload(windowInfo.startDate, windowInfo.endDate));
+    }
+  };
+
+  // Fixed price calculation function
+  const calculatePrice = (service, duration, urgent) => {
+    if (!service || !duration) return 0;
+    
+    const durationObj = service.durations.find(d => d.time === parseInt(duration));
+    if (!durationObj) return 0;
+
+    // Determine which price to use based on location and urgency
+    const location = formData.location || 'india';
+    const isIndian = location.toLowerCase() === 'india';
+    
+    if (urgent) {
+      return isIndian ? durationObj.urgentPriceIndia : durationObj.urgentPriceNri;
+    } else {
+      return isIndian ? durationObj.priceIndia : durationObj.priceNri;
     }
   };
 
@@ -93,15 +119,21 @@ const BookingModal = ({
     e.preventDefault();
     
     // Validate all required fields
-    if (!formData.name || !formData.email || !formData.phoneNumber || !formData.location || !selectedDuration || !selectedWindow || !selectedWindowDates) {
+    if (!formData.name || !formData.email || !formData.phoneNumber || !formData.location || !selectedWindow || !selectedWindowDates) {
       alert("Please fill in all required fields before proceeding.");
       return;
     }
+
+    // For single question service, automatically set duration to 15 minutes
+    const finalDuration = isSingleQuestionService ? 15 : selectedDuration;
 
     // Add "Urgent" to service title if urgent is selected
     const serviceType = isUrgent 
       ? `${selectedService.title} Urgent` 
       : selectedService.title;
+
+    // Calculate price using the fixed function
+    const calculatedPrice = calculatePrice(selectedService, finalDuration, isUrgent);
 
     // Prepare appointment data with dates
     const appointmentData = {
@@ -111,17 +143,18 @@ const BookingModal = ({
       serviceType: serviceType,
       selectedWindow: selectedWindow,
       selectedWindowDates: selectedWindowDates,
-      duration: parseInt(selectedDuration),
-      price: getPrice(selectedService, selectedDuration, isUrgent),
-      location: formData.location
+      duration: parseInt(finalDuration),
+      price: calculatedPrice,
+      location: formData.location,
+      isUrgent: isUrgent
     };
 
     await processPayment(appointmentData, handlePaymentSuccess, handlePaymentError);
   };
 
-  // Form validation
+  // Form validation - for single question, duration is not required in UI
   const isFormValid = formData.name && formData.email && formData.location && 
-                     formData.phoneNumber && selectedDuration && selectedWindow && selectedWindowDates;
+                     formData.phoneNumber && selectedWindow && selectedWindowDates;
 
   return (
     <>
@@ -157,7 +190,9 @@ const BookingModal = ({
                 setIsUrgent={setIsUrgent}
                 handleDurationSelect={handleDurationSelect}
                 handleWindowSelect={handleWindowSelect}
-                getPrice={getPrice}
+                calculatePrice={calculatePrice}
+                formData={formData}
+                isSingleQuestionService={isSingleQuestionService}
               />
             )}
           </div>
@@ -308,20 +343,26 @@ const ServiceConfigurationSection = ({
   setIsUrgent,
   handleDurationSelect,
   handleWindowSelect,
-  getPrice
+  calculatePrice,
+  formData,
+  isSingleQuestionService
 }) => (
   <div className="space-y-3 mt-4">
     <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
       Service Configuration
     </h4>
     
-    <DurationSelection 
-      selectedService={selectedService}
-      selectedDuration={selectedDuration}
-      handleDurationSelect={handleDurationSelect}
-    />
+    {/* Show duration selection only for non-single question services */}
+    {!isSingleQuestionService && (
+      <DurationSelection 
+        selectedService={selectedService}
+        selectedDuration={selectedDuration}
+        handleDurationSelect={handleDurationSelect}
+      />
+    )}
 
-    {selectedDuration && (
+    {/* For single question service, directly show urgency and window selection */}
+    {(selectedDuration || isSingleQuestionService) && (
       <>
         <UrgencySelection isUrgent={isUrgent} setIsUrgent={setIsUrgent} />
         
@@ -336,12 +377,14 @@ const ServiceConfigurationSection = ({
 
     {selectedWindow && selectedWindowDates && (
       <PriceDisplay 
-        selectedDuration={selectedDuration}
+        selectedDuration={isSingleQuestionService ? 15 : selectedDuration}
         selectedWindow={selectedWindow}
         selectedWindowDates={selectedWindowDates}
         selectedService={selectedService}
         isUrgent={isUrgent}
-        getPrice={getPrice}
+        calculatePrice={calculatePrice}
+        formData={formData}
+        isSingleQuestionService={isSingleQuestionService}
       />
     )}
   </div>
@@ -490,48 +533,54 @@ const WindowOption = ({ window, windowInfo, isCurrentlyAvailable, isSelected, on
   </button>
 );
 
-const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, isUrgent, getPrice }) => (
-  <div className="bg-gradient-to-r from-[#4A6FA5]/5 to-[#7D4E7A]/5 border border-[#4A6FA5]/20 p-3 rounded-lg">
-    <div className="flex justify-between items-center">
-      <div>
-        <span className="text-sm text-[#66626A]">Session Duration:</span>
-        <p className="font-medium text-[#4A6FA5] text-sm">{selectedDuration} minutes</p>
-        <span className="text-sm text-[#66626A] mt-0.5 block">Service Type:</span>
-        <p className="font-medium text-[#4A6FA5] text-sm">
-          {isUrgent ? '🚨 Urgent' : 'Normal'}
-        </p>
-        <span className="text-sm text-[#66626A] mt-0.5 block">Appointment Window:</span>
-        <p className="font-medium text-[#4A6FA5] text-sm">{selectedWindow}</p>
-        <span className="text-sm text-[#66626A] mt-0.5 block">Available Period:</span>
-        <p className="font-medium text-[#7D4E7A] text-sm">
-          {selectedWindowDates.displayDate}
-        </p>
-        <span className="text-xs text-gray-500 mt-0.5 block">
-          {new Date(selectedWindowDates.startDate).toLocaleDateString('en-IN', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-          })} to {new Date(selectedWindowDates.endDate).toLocaleDateString('en-IN', { 
-            day: 'numeric', 
-            month: 'long', 
-            year: 'numeric' 
-          })}
-        </span>
-      </div>
-      <div className="text-right">
-        <span className="text-sm text-[#66626A]">Total Price:</span>
-        <p className="text-xl font-bold text-[#4A6FA5]">
-          ₹{getPrice(selectedService, selectedDuration, isUrgent)}
-        </p>
-        {isUrgent && (
-          <span className="text-xs text-orange-600 mt-0.5 block">
-            Urgent pricing
+const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, isUrgent, calculatePrice, formData, isSingleQuestionService }) => {
+  const price = calculatePrice(selectedService, selectedDuration, isUrgent);
+  const location = formData.location || 'india';
+  const isIndian = location.toLowerCase() === 'india';
+
+  return (
+    <div className="bg-gradient-to-r from-[#4A6FA5]/5 to-[#7D4E7A]/5 border border-[#4A6FA5]/20 p-3 rounded-lg">
+      <div className="flex justify-between items-center">
+        <div>
+          <span className="text-sm text-[#66626A]">Session Duration:</span>
+          <p className="font-medium text-[#4A6FA5] text-sm">
+            {selectedDuration} minutes
+          </p>
+          <span className="text-sm text-[#66626A] mt-0.5 block">Service Type:</span>
+          <p className="font-medium text-[#4A6FA5] text-sm">
+            {isUrgent ? '🚨 Urgent' : 'Normal'}
+          </p>
+          <span className="text-sm text-[#66626A] mt-0.5 block">Appointment Window:</span>
+          <p className="font-medium text-[#4A6FA5] text-sm">{selectedWindow}</p>
+          <span className="text-sm text-[#66626A] mt-0.5 block">Available Period:</span>
+          <p className="font-medium text-[#7D4E7A] text-sm">
+            {selectedWindowDates.displayDate}
+          </p>
+          <span className="text-xs text-gray-500 mt-0.5 block">
+            {new Date(selectedWindowDates.startDate).toLocaleDateString('en-IN', { 
+              day: 'numeric', 
+              month: 'long', 
+              year: 'numeric' 
+            })} to {new Date(selectedWindowDates.endDate).toLocaleDateString('en-IN', { 
+              day: 'numeric', 
+              month: 'long', 
+              year: 'numeric' 
+            })}
           </span>
-        )}
+          <span className="text-xs text-gray-500 mt-0.5 block">
+            Location: {isIndian ? 'India' : 'International'}
+          </span>
+        </div>
+        <div className="text-right">
+          <span className="text-sm text-[#66626A]">Total Price:</span>
+          <p className="text-xl font-bold text-[#4A6FA5]">
+            ₹{price}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Footer = ({ closeModal, isFormValid, isProcessing, handleSubmit }) => (
   <div className="border-t border-gray-100 p-5">
