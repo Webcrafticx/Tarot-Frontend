@@ -1,6 +1,6 @@
 import React from "react";
 
-const WhatsAppButton = ({ appointmentDetails, phoneNumber = "919008408625" }) => {
+const WhatsAppButton = ({ appointmentDetails, phoneNumber = "918861534739" }) => {
   const openWhatsApp = () => {
     const message = `Hello! I just booked an appointment for ${appointmentDetails.serviceType}. Please provide me with more details about my appointment. Here are my details:\n\nName: ${appointmentDetails.name}\nEmail: ${appointmentDetails.email}\nPhone: ${appointmentDetails.phone}\nService: ${appointmentDetails.serviceType}\nDuration: ${appointmentDetails.duration} minutes\nWindow: ${appointmentDetails.selectedWindow}\nDate Range: ${appointmentDetails.selectedWindowDates?.displayDate}\nAmount Paid: ₹${appointmentDetails.price}`;
     

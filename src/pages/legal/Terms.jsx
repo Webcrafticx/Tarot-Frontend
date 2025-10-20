@@ -128,7 +128,7 @@ const Terms = () => {
                                 </a>
                             </p>
                             <p className="text-gray-700">
-                                <strong>Phone:</strong> +91 9008408625
+                                <strong>Phone:</strong> +91 8861534739
                             </p>
                         </div>
                     </div>

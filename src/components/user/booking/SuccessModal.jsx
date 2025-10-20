@@ -36,7 +36,7 @@ const SuccessModal = ({ appointmentDetails, onClose, onWhatsAppClick }) => {
               Please message on WhatsApp for more details:
             </p>
             <div className="bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-3 rounded-lg mb-2">
-              <span className="text-lg font-bold">9008408625</span>
+              <span className="text-lg font-bold">8861534739</span>
             </div>
             <p className="text-xs text-gray-600">
               Send your appointment details on WhatsApp to get confirmation and further instructions.
