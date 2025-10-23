@@ -35,6 +35,11 @@ const BookingModal = ({
   // Check if it's single question service
   const isSingleQuestionService = selectedService?.title?.toLowerCase().includes('single question');
 
+  // Get selected country details
+  const getSelectedCountry = () => {
+    return countryCodes.find(country => country.code === selectedCountryCode);
+  };
+
   // Load appointment windows on component mount
   useEffect(() => {
     const fetchAvailabilityWindows = async () => {
@@ -65,6 +70,46 @@ const BookingModal = ({
     setIsUrgent(false);
   }, [selectedService, selectedDuration]);
 
+  // Enhanced location auto-fill based on country code
+  useEffect(() => {
+    if (selectedCountryCode && formData.phoneNumber) {
+      const selectedCountry = getSelectedCountry();
+      if (selectedCountry) {
+        const location = selectedCountry.country; // Use country name instead of type
+        
+        // Only update if location is different from current value
+        if (formData.location !== location) {
+          handleInputChange({
+            target: {
+              name: 'location',
+              value: location
+            }
+          });
+        }
+      }
+    }
+  }, [selectedCountryCode, formData.phoneNumber, formData.location, handleInputChange]);
+
+  // Enhanced location auto-fill when phone number changes with existing country code
+  useEffect(() => {
+    if (formData.phoneNumber && selectedCountryCode) {
+      const selectedCountry = getSelectedCountry();
+      if (selectedCountry) {
+        const location = selectedCountry.country; // Use country name instead of type
+        
+        // Only update if location is different from current value
+        if (formData.location !== location) {
+          handleInputChange({
+            target: {
+              name: 'location',
+              value: location
+            }
+          });
+        }
+      }
+    }
+  }, [formData.phoneNumber, selectedCountryCode, formData.location, handleInputChange]);
+
   // Handle window selection
   const handleWindowSelect = (windowName) => {
     setSelectedWindow(windowName);
@@ -74,7 +119,30 @@ const BookingModal = ({
     }
   };
 
-  // Fixed price calculation function
+  // Enhanced location detection function - returns country name
+  const detectLocationFromCountryCode = (countryCode) => {
+    const country = countryCodes.find(c => c.code === countryCode);
+    return country ? country.country : 'International';
+  };
+
+  // Enhanced country code change handler with immediate location update
+  const enhancedHandleCountryCodeChange = (e) => {
+    const newCountryCode = e.target.value;
+    handleCountryCodeChange(e);
+    
+    // Immediately update location based on new country code
+    const newLocation = detectLocationFromCountryCode(newCountryCode);
+    if (formData.location !== newLocation) {
+      handleInputChange({
+        target: {
+          name: 'location',
+          value: newLocation
+        }
+      });
+    }
+  };
+
+  // Fixed price calculation function - now checks if location is India
   const calculatePrice = (service, duration, urgent) => {
     if (!service || !duration) return 0;
     
@@ -82,7 +150,7 @@ const BookingModal = ({
     if (!durationObj) return 0;
 
     // Determine which price to use based on location and urgency
-    const location = formData.location || 'india';
+    const location = formData.location || 'India';
     const isIndian = location.toLowerCase() === 'india';
     
     if (urgent) {
@@ -112,6 +180,12 @@ const BookingModal = ({
   const handlePaymentError = (error) => {
     console.error("Payment process failed:", error);
     alert(`Payment failed: ${error.message}. Please try again.`);
+  };
+
+  // Check if location is India for pricing
+  const isIndianLocation = () => {
+    const location = formData.location || 'India';
+    return location.toLowerCase() === 'india';
   };
 
   // Handle form submission and payment process
@@ -146,7 +220,8 @@ const BookingModal = ({
       duration: parseInt(finalDuration),
       price: calculatedPrice,
       location: formData.location,
-      isUrgent: isUrgent
+      isUrgent: isUrgent,
+      isIndian: isIndianLocation()
     };
 
     await processPayment(appointmentData, handlePaymentSuccess, handlePaymentError);
@@ -175,7 +250,8 @@ const BookingModal = ({
               selectedCountryCode={selectedCountryCode}
               countryCodes={countryCodes}
               handleInputChange={handleInputChange}
-              handleCountryCodeChange={handleCountryCodeChange}
+              handleCountryCodeChange={enhancedHandleCountryCodeChange}
+              getSelectedCountry={getSelectedCountry}
             />
 
             {formData.phoneNumber && formData.location && (
@@ -193,6 +269,7 @@ const BookingModal = ({
                 calculatePrice={calculatePrice}
                 formData={formData}
                 isSingleQuestionService={isSingleQuestionService}
+                isIndianLocation={isIndianLocation}
               />
             )}
           </div>
@@ -227,53 +304,62 @@ const PersonalInfoSection = ({
   selectedCountryCode,
   countryCodes,
   handleInputChange,
-  handleCountryCodeChange
-}) => (
-  <div className="space-y-3">
-    <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
-      Personal Information
-    </h4>
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-      <div>
-        <label className="block text-sm font-medium text-[#66626A] mb-1">Name *</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
-          placeholder="Enter your name"
-        />
+  handleCountryCodeChange,
+  getSelectedCountry
+}) => {
+  const selectedCountry = getSelectedCountry();
+  
+  return (
+    <div className="space-y-3">
+      <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
+        Personal Information
+      </h4>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <label className="block text-sm font-medium text-[#66626A] mb-1">Name *</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-[#66626A] mb-1">Email *</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
+            placeholder="Enter your email"
+          />
+        </div>
       </div>
-      <div>
-        <label className="block text-sm font-medium text-[#66626A] mb-1">Email *</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent transition-all cursor-text text-sm"
-          placeholder="Enter your email"
+
+      <PhoneInput 
+        formData={formData}
+        selectedCountryCode={selectedCountryCode}
+        countryCodes={countryCodes}
+        handleInputChange={handleInputChange}
+        handleCountryCodeChange={handleCountryCodeChange}
+      />
+
+      {formData.phoneNumber && (
+        <LocationInput 
+          formData={formData} 
+          handleInputChange={handleInputChange}
+          selectedCountry={selectedCountry}
         />
-      </div>
+      )}
     </div>
-
-    <PhoneInput 
-      formData={formData}
-      selectedCountryCode={selectedCountryCode}
-      countryCodes={countryCodes}
-      handleInputChange={handleInputChange}
-      handleCountryCodeChange={handleCountryCodeChange}
-    />
-
-    {formData.phoneNumber && (
-      <LocationInput formData={formData} handleInputChange={handleInputChange} />
-    )}
-  </div>
-);
+  );
+};
 
 const PhoneInput = ({ formData, selectedCountryCode, countryCodes, handleInputChange, handleCountryCodeChange }) => (
   <div>
@@ -313,24 +399,33 @@ const PhoneInput = ({ formData, selectedCountryCode, countryCodes, handleInputCh
   </div>
 );
 
-const LocationInput = ({ formData, handleInputChange }) => (
-  <div>
-    <label className="block text-sm font-medium text-[#66626A] mb-1">
-      Location *
-      <span className="text-xs text-gray-400 ml-2 font-normal">(Auto-filled)</span>
-    </label>
-    <input
-      type="text"
-      name="location"
-      value={formData.location}
-      onChange={handleInputChange}
-      required
-      readOnly
-      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent bg-gray-50 cursor-text text-sm"
-      placeholder="Location will be auto-filled"
-    />
-  </div>
-);
+const LocationInput = ({ formData, handleInputChange, selectedCountry }) => {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-[#66626A] mb-1">
+        Location *
+        <span className="text-xs text-gray-400 ml-2 font-normal">(Auto-detected)</span>
+      </label>
+      <input
+        type="text"
+        name="location"
+        value={formData.location}
+        onChange={handleInputChange}
+        required
+        readOnly
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A6FA5] focus:border-transparent bg-gray-50 cursor-not-allowed text-sm"
+      />
+      <p className="text-xs text-gray-500 mt-1">
+        Location automatically detected from your country code selection
+        {selectedCountry && (
+          <span className="ml-1">
+            ({selectedCountry.flag} {selectedCountry.country})
+          </span>
+        )}
+      </p>
+    </div>
+  );
+};
 
 const ServiceConfigurationSection = ({
   selectedService,
@@ -345,7 +440,8 @@ const ServiceConfigurationSection = ({
   handleWindowSelect,
   calculatePrice,
   formData,
-  isSingleQuestionService
+  isSingleQuestionService,
+  isIndianLocation
 }) => (
   <div className="space-y-3 mt-4">
     <h4 className="text-sm font-serif text-[#4A6FA5] uppercase tracking-wide border-b border-[#D4A5C3] pb-1.5">
@@ -385,6 +481,7 @@ const ServiceConfigurationSection = ({
         calculatePrice={calculatePrice}
         formData={formData}
         isSingleQuestionService={isSingleQuestionService}
+        isIndianLocation={isIndianLocation}
       />
     )}
   </div>
@@ -533,10 +630,9 @@ const WindowOption = ({ window, windowInfo, isCurrentlyAvailable, isSelected, on
   </button>
 );
 
-const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, isUrgent, calculatePrice, formData, isSingleQuestionService }) => {
+const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, selectedService, isUrgent, calculatePrice, formData, isSingleQuestionService, isIndianLocation }) => {
   const price = calculatePrice(selectedService, selectedDuration, isUrgent);
-  const location = formData.location || 'india';
-  const isIndian = location.toLowerCase() === 'india';
+  const isIndian = isIndianLocation();
 
   return (
     <div className="bg-gradient-to-r from-[#4A6FA5]/5 to-[#7D4E7A]/5 border border-[#4A6FA5]/20 p-3 rounded-lg">
@@ -568,7 +664,7 @@ const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, s
             })}
           </span>
           <span className="text-xs text-gray-500 mt-0.5 block">
-            Location: {isIndian ? 'India' : 'International'}
+            Location: {formData.location}
           </span>
         </div>
         <div className="text-right">
@@ -576,6 +672,9 @@ const PriceDisplay = ({ selectedDuration, selectedWindow, selectedWindowDates, s
           <p className="text-xl font-bold text-[#4A6FA5]">
             ₹{price}
           </p>
+          {/* <p className="text-xs text-gray-500 mt-0.5">
+            {isIndian ? 'Domestic Pricing' : 'International Pricing'}
+          </p> */}
         </div>
       </div>
     </div>
