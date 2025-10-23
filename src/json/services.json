@@ -37,25 +37,11 @@
         "alt": "Akashic record reading",
         "durations": [
             {
-                "time": 15,
-                "priceIndia": 1500,
-                "priceNri": 2000,
-                "urgentPriceIndia": 2500,
-                "urgentPriceNri": 3000
-            },
-            {
                 "time": 30,
                 "priceIndia": 2999,
                 "priceNri": 3999,
                 "urgentPriceIndia": 3999,
                 "urgentPriceNri": 4999
-            },
-            {
-                "time": 60,
-                "priceIndia": 5999,
-                "priceNri": 7999,
-                "urgentPriceIndia": 6999,
-                "urgentPriceNri": 8999
             }
         ],
         "sessionsRequired": 6
