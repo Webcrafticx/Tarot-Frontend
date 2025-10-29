@@ -205,11 +205,6 @@ const Testimonials = () => {
                             : "translate-y-6 opacity-0"
                     }`}
                 >
-                    <div className="border-solid border-[#4A6FA5] border-2 rounded-full p-0.5 md:p-1 inline-block transition-all duration-300 hover:border-[#7D4E7A] hover:scale-105">
-                        <button className="bg-gradient-to-r from-[#4A6FA5] to-[#7D4E7A] hover:from-[#3A5A8C] hover:to-[#6D3E69] cursor-pointer text-white px-6 py-2 md:px-8 md:py-3 rounded-full text-xs md:text-sm font-semibold tracking-wider transition-all duration-300 hover:shadow-lg uppercase">
-                            Share Your Experience
-                        </button>
-                    </div>
                 </div>
             </div>
         </Container>
